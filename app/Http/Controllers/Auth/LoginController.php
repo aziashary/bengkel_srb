@@ -34,13 +34,14 @@ class LoginController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('guest')->except('logout');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('guest')->except('logout');
+    // }
     
     public function login(Request $request)
 {
+    $input = $request->all();
     $this->validate($request, [
         'username' => 'required|string', //VALIDASI KOLOM USERNAME
         //TAPI KOLOM INI BISA BERISI EMAIL ATAU USERNAME
@@ -48,20 +49,20 @@ class LoginController extends Controller
     ]);
 
     //LAKUKAN PENGECEKAN, JIKA INPUTAN DARI USERNAME FORMATNYA ADALAH EMAIL, MAKA KITA AKAN MELAKUKAN PROSES AUTHENTICATION MENGGUNAKAN EMAIL, SELAIN ITU, AKAN MENGGUNAKAN USERNAME
-    $loginType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
-  
-    //TAMPUNG INFORMASI LOGINNYA, DIMANA KOLOM TYPE PERTAMA BERSIFAT DINAMIS BERDASARKAN VALUE DARI PENGECEKAN DIATAS
-    $login = [
-        $loginType => $request->username,
-        'password' => $request->password
-    ];
-  
-    //LAKUKAN LOGIN
-    if (auth()->attempt($login)) {
-        //JIKA BERHASIL, MAKA REDIRECT KE HALAMAN HOME
-        return redirect()->route('home');
+    if(auth()->attempt(array('username' => $input['username'], 'password' => $input['password']))){
+    if (auth()->user()->jabatan == 'kasir') {
+        return redirect()->route('kasir');
+    }elseif (auth()->user()->jabatan == 'kabeng'){
+        return redirect()->route('kabeng');
+    }elseif (auth()->user()->jabatan == 'management'){
+        return redirect()->route('management');
+    }elseif (auth()->user()->jabatan == 'sparepart'){
+        return redirect()->route('sparepart');
     }
-    //JIKA SALAH, MAKA KEMBALI KE LOGIN DAN TAMPILKAN NOTIFIKASI 
-    return redirect()->route('login')->with(['error' => 'Email/Password salah!']);
+    }else{
+    return redirect()->route('login')
+        ->with('error','Email-Address And Password Are Wrong.');
+}
+  
 }
 }

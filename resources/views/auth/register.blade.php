@@ -30,10 +30,10 @@
                             <div class="col-md-6">
                                 <select class="form-control @error('jabatan') is-invalid @enderror" name="jabatan" value="{{ old('jabatan') }}" required autocomplete="jabatan">
                                 <option value="{{ old('jabatan') }}">- Pilih -</option>
-                                        <option value="Kasir">Kasir</option>
-                                        <option value="Sparepart">Sparepart</option>
-                                        <option value="KepalaBengkel">KepalaBengkel</option>
-                                        <option value="Management">Management</option>
+                                        <option value="kasir">Kasir</option>
+                                        <option value="sparepart">Sparepart</option>
+                                        <option value="Kepala_bengkel">Kepala Bengkel</option>
+                                        <option value="management">Management</option>
                                 </select>
                                 @error('jabatan')
                                     <span class="invalid-feedback" role="alert">
