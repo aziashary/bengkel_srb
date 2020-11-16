@@ -40,3 +40,4 @@ Route::get('/dashboard/kabeng', 'HomeController@kabeng')->name('kabeng');
 Route::get('/dashboard/kasir', 'HomeController@kasir')->name('kasir')->middleware('cekstatus');
 Route::get('/dashboard/sparepart', 'HomeController@sparepart')->name('sparepart');
 Route::get('/dashboard/management', 'HomeController@management')->name('management');
+Route::get('/barang/barang', 'BarangController@showbarang')->name('showbarang');

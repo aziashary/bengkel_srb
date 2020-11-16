@@ -32,7 +32,7 @@
                                 <option value="{{ old('jabatan') }}">- Pilih -</option>
                                         <option value="kasir">Kasir</option>
                                         <option value="sparepart">Sparepart</option>
-                                        <option value="Kepala_bengkel">Kepala Bengkel</option>
+                                        <option value="kepala_bengkel">Kepala Bengkel</option>
                                         <option value="management">Management</option>
                                 </select>
                                 @error('jabatan')

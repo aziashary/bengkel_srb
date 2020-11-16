@@ -19,6 +19,6 @@ class CekStatus
             if (auth()->user()->jabatan  == 'kasir') {
             return $next($request);
     }
-    return redirect('login')->with('error',"You don't have admin access.");
+    return alert('error',"You don't have admin access.");
 }
 }

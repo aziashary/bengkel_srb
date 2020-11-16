@@ -52,7 +52,7 @@ class LoginController extends Controller
     if(auth()->attempt(array('username' => $input['username'], 'password' => $input['password']))){
     if (auth()->user()->jabatan == 'kasir') {
         return redirect()->route('kasir');
-    }elseif (auth()->user()->jabatan == 'kabeng'){
+    }elseif (auth()->user()->jabatan == 'kepala_bengkel'){
         return redirect()->route('kabeng');
     }elseif (auth()->user()->jabatan == 'management'){
         return redirect()->route('management');
@@ -60,7 +60,7 @@ class LoginController extends Controller
         return redirect()->route('sparepart');
     }
     }else{
-    return redirect()->route('login')
+    return redirect()->route('welcome')
         ->with('error','Email-Address And Password Are Wrong.');
 }
   
