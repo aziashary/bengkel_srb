@@ -41,3 +41,16 @@ Route::get('/dashboard/kasir', 'HomeController@kasir')->name('kasir')->middlewar
 Route::get('/dashboard/sparepart', 'HomeController@sparepart')->name('sparepart');
 Route::get('/dashboard/management', 'HomeController@management')->name('management');
 Route::get('/barang/barang', 'BarangController@showbarang')->name('showbarang');
+
+// Route::group(['prefix' => 'kabeng'], function () { 
+    Route::get('/dashboard', 'HomeKabengController@index')->name('dashboard');
+
+// });
+Route::group(['prefix' => 'workorder'], function () {
+    Route::get('/', ['as' => 'workorder.index', 'uses' => 'WorkOrderController@index']);
+    Route::get('/create', ['as' => 'workorder.create', 'uses' => 'WorkOrderController@create']);
+    // Route::post('/store', ['as' => 'jenis.store', 'uses' => 'JenisController@store']);
+    // Route::get('/destroy/{id}', ['as' => 'jenis.destroy', 'uses' => 'JenisController@destroy']);
+    // Route::get('/edit/{id}', ['as' => 'jenis.edit', 'uses' => 'JenisController@edit']);
+    // Route::patch('/update/{id}', ['as' => 'jenis.update', 'uses' => 'JenisController@update']);
+});

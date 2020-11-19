@@ -1,4 +1,5 @@
 @extends('layouts.lo_kabeng')
+
 @section('content')
 <div class="container-fluid">
 	<title>Table Invoice</title>
