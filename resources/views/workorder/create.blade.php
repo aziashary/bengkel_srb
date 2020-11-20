@@ -1,8 +1,8 @@
 @extends('layouts.lo_kabeng')
 
 @section('content')
-    <div class="container-fluid">
-    <h3 class="mt-4">Tambah Wrok Order</h3>
+<div class="container-fluid">
+    <h3 class="mt-4">Tambah Work Order</h3>
     <div class="card mb-4">
         <div class="card-body">
             <form>

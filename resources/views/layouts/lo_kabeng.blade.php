@@ -25,7 +25,7 @@
       <ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        <title>Aplikasi Bengkel</title> 
+       
 
         <a class="sidebar-brand d-flex align-items-center justify-content-center " href="#">
           <div class="sidebar-brand-icon rotate-n-15">
@@ -65,8 +65,8 @@
               </a>
               <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                  <a class="collapse-item" href="{{ route('showbarang') }}">Barang</a>
-                  <a class="collapse-item" href="cards.html">Tambah Barang</a>
+                  <a class="collapse-item" href="{{ route('barang.index') }}">Barang</a>
+                  <a class="collapse-item" href="{{ route('barang.create') }}">Tambah Barang</a>
                 </div>
               </div>
             </li>
@@ -79,8 +79,8 @@
           </a>
           <div id="collapsekategori" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-              <a class="collapse-item" href="utilities-color.html">Kategori</a>
-              <a class="collapse-item" href="utilities-border.html">Tambah Kategori</a>
+              <a class="collapse-item" href="{{ route('kategori.index') }}">Kategori</a>
+              <a class="collapse-item" href="{{ route('kategori.create') }}">Tambah Kategori</a>
             </div>
           </div>
         </li>
@@ -93,8 +93,8 @@
           <div id="collapsestok" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
               <h6 class="collapse-header">Stok:</h6>
-              <a class="collapse-item" href="utilities-color.html">Tambah Stok</a>
-              <a class="collapse-item" href="utilities-border.html">Stok Terbaru</a>
+              <a class="collapse-item" href="{{ route('stokmasuk.index')}}">Stok Terbaru</a>
+              <a class="collapse-item" href="{{ route('stokmasuk.create')}}">Tambah Stok</a>
             </div>
           </div>
         </li>
@@ -265,7 +265,7 @@
         <footer class="sticky-footer bg-white">
           <div class="container my-auto">
             <div class="copyright text-center my-auto">
-              <span>Copyright &copy; Your Website 2020</span>
+              <span>Copyright &copy; PT. Sarana Rezeki Bersama</span>
             </div>
           </div>
         </footer>
