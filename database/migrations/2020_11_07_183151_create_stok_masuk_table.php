@@ -19,7 +19,6 @@ class CreateStokMasukTable extends Migration
             $table->string('nama_barang');
             $table->integer('jumlah');
             $table->string('nama_user');
-            $table->date('tanggal');
             $table->timestamps();
         });
     }

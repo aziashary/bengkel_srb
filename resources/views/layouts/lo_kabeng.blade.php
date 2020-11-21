@@ -25,7 +25,7 @@
       <ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        <title>Aplikasi Bengkel</title> 
+       
 
         <a class="sidebar-brand d-flex align-items-center justify-content-center " href="#">
           <div class="sidebar-brand-icon rotate-n-15">
@@ -57,56 +57,58 @@
         <!-- Divider -->
         <hr class="sidebar-divider">
 
+        @if( Auth::user()->jabatan == 1 || Auth::user()->jabatan == 2 )
         <!-- Heading -->
         <div class="sidebar-heading text-white" >
           Data Barang
         </div>
 
         <!-- Nav Item - Pages Collapse Menu -->
-          @if( Auth::user()->jabatan != 4 )
-            <li class="nav-item">
-              <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-              <i class="fas fa-newspaper"></i>
-                <span>Barang</span>
-              </a>
-              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                  <a class="collapse-item" href="#">Barang</a>
-                  <a class="collapse-item" href="cards.html">Tambah Barang</a>
-                </div>
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-newspaper"></i>
+              <span>Barang</span>
+            </a>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+              <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{{ route('barang.index') }}">Barang</a>
+                <a class="collapse-item" href="{{ route('barang.create') }}">Tambah Barang</a>
               </div>
-            </li>
-          @endif
-
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsekategori" aria-expanded="true" aria-controls="collapseUtilities">
-          <i class="fab fa-buromobelexperte"></i>
-            <span>Kategori</span>
-          </a>
-          <div id="collapsekategori" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-              <a class="collapse-item" href="utilities-color.html">Kategori</a>
-              <a class="collapse-item" href="utilities-border.html">Tambah Kategori</a>
             </div>
-          </div>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsestok" aria-expanded="true" aria-controls="collapseUtilities">
-            <i class="fas fa-box"></i>
-            <span>Stok</span>
-          </a>
-          <div id="collapsestok" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-              <a class="collapse-item" href="utilities-color.html">Tambah Stok</a>
-              <a class="collapse-item" href="utilities-border.html">Stok Terbaru</a>
+          </li>
+        
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsekategori" aria-expanded="true" aria-controls="collapseUtilities">
+            <i class="fab fa-buromobelexperte"></i>
+              <span>Kategori</span>
+            </a>
+            <div id="collapsekategori" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+              <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{{ route('kategori.index') }}">Kategori</a>
+                <a class="collapse-item" href="{{ route('kategori.create') }}">Tambah Kategori</a>
+              </div>
             </div>
-          </div>
-        </li>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsestok" aria-expanded="true" aria-controls="collapseUtilities">
+              <i class="fas fa-box"></i>
+              <span>Stok</span>
+            </a>
+            <div id="collapsestok" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+              <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Stok:</h6>
+                <a class="collapse-item" href="{{ route('stokmasuk.index')}}">Stok Terbaru</a>
+                <a class="collapse-item" href="{{ route('stokmasuk.create')}}">Tambah Stok</a>
+              </div>
+            </div>
+          </li>
 
         <!-- Divider -->
         <hr class="sidebar-divider">
+        @endif
         
+        @if( Auth::user()->jabatan == 1 || Auth::user()->jabatan == 2 || Auth::user()->jabatan == 4 )
         <!-- Heading -->
         <div class="sidebar-heading text-white" >
           Transaksi
@@ -141,7 +143,8 @@
 
         <!-- Divider -->
         <hr class="sidebar-divider">
-        
+        @endif
+
         <!-- Heading -->
         <div class="sidebar-heading text-white" >
           Laporan
@@ -189,7 +192,6 @@
           </li>
         @endif
           
-        
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
 
@@ -267,7 +269,7 @@
         <footer class="sticky-footer bg-white">
           <div class="container my-auto">
             <div class="copyright text-center my-auto">
-              <span>Copyright &copy; Your Website 2020</span>
+              <span>Copyright &copy; PT. Sarana Rezeki Bersama</span>
             </div>
           </div>
         </footer>

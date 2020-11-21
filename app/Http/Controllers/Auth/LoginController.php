@@ -21,17 +21,18 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
-    // public function username()
-    // {
-    //     return 'username';
-    // }
+    public function username(){
+        return 'username';
+    }
 
     /**
      * Where to redirect users after login.
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::DASHBOARD;
+
+    protected $redirectTo = RouteServiceProvider::HOME;
+    // protected $redirectTo = 'dashboard';
 
     /**
      * Create a new controller instance.
@@ -42,28 +43,4 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-    
-    // public function login(Request $request)
-    // {
-    //     $input = $request->all();
-    //     $this->validate($request, [
-    //         'username' => 'required|string', //VALIDASI KOLOM USERNAME
-    //         //TAPI KOLOM INI BISA BERISI EMAIL ATAU USERNAME
-    //         'password' => 'required|string|min:6',
-    //     ]);
-
-    //     //LAKUKAN PENGECEKAN, JIKA INPUTAN DARI USERNAME FORMATNYA ADALAH EMAIL, MAKA KITA AKAN MELAKUKAN PROSES AUTHENTICATION MENGGUNAKAN EMAIL, SELAIN ITU, AKAN MENGGUNAKAN USERNAME
-    //     if(auth()->attempt(array('username' => $input['username'], 'password' => $input['password']))){
-    //         if (auth()->user()->jabatan == 'kasir') {
-    //             return redirect()->route('kasir');
-    //         }elseif (auth()->user()->jabatan == 'kepala_bengkel'){
-    //             return redirect()->route('kabeng');
-    //         }elseif (auth()->user()->jabatan == 'management'){
-    //             return redirect()->route('management');
-    //         }elseif (auth()->user()->jabatan == 'sparepart'){
-    //             return redirect()->route('sparepart');
-    //         }else{
-    //             return redirect()->route('welcome')->with('error','Email-Address And Password Are Wrong.');
-    //         }
-    // }
 }
