@@ -31,11 +31,17 @@
           <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
           </div>
-          @if( Auth::user()->jabatan == 'kepala_bengkel' )
-            <div class="sidebar-brand-text mx-3">Kepala Bengkel</div>
-          @else
-            <div class="sidebar-brand-text mx-3">Others</div>
-          @endif
+          <div class="sidebar-brand-text mx-3">
+            @if( Auth::user()->jabatan == 1 )
+              Kepala Bengkel
+            @elseif( Auth::user()->jabatan == 2 )
+              Sparepart
+            @elseif( Auth::user()->jabatan == 3 )
+              Management
+            @elseif( Auth::user()->jabatan == 4 )
+              Kasir
+            @endif
+          </div>
         </a>
 
         <!-- Divider -->
@@ -57,7 +63,7 @@
         </div>
 
         <!-- Nav Item - Pages Collapse Menu -->
-          @if( Auth::user()->jabatan != 'kasir' )
+          @if( Auth::user()->jabatan != 4 )
             <li class="nav-item">
               <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
               <i class="fas fa-newspaper"></i>
@@ -65,7 +71,7 @@
               </a>
               <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                  <a class="collapse-item" href="{{ route('showbarang') }}">Barang</a>
+                  <a class="collapse-item" href="#">Barang</a>
                   <a class="collapse-item" href="cards.html">Tambah Barang</a>
                 </div>
               </div>
@@ -92,7 +98,6 @@
           </a>
           <div id="collapsestok" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-              <h6 class="collapse-header">Stok:</h6>
               <a class="collapse-item" href="utilities-color.html">Tambah Stok</a>
               <a class="collapse-item" href="utilities-border.html">Stok Terbaru</a>
             </div>
@@ -115,7 +120,6 @@
           </a>
           <div id="collapseworkorder" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-              <h6 class="collapse-header">Work Order : </h6>
               <a class="collapse-item" href="{{ route('workorder.create') }}">Tambah Work Order</a>
               <a class="collapse-item" href="{{ route('workorder.index') }}">Data Work Order</a>
             </div>
@@ -129,7 +133,6 @@
           </a>
           <div id="collapseinvoice" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-              <h6 class="collapse-header">Work Order : </h6>
               <a class="collapse-item" href="cards.html">Tambah Work Order</a>
               <a class="collapse-item" href="buttons.html">Data Work Order</a>
             </div>
@@ -152,7 +155,6 @@
           </a>
           <div id="collapsetransaksi" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-              <h6 class="collapse-header">Transaksi : </h6>
               <a class="collapse-item" href="cards.html">Riwayat Work Order</a>
               <a class="collapse-item" href="buttons.html">Riwayat Invoice</a>
             </div>
@@ -166,26 +168,26 @@
           </a>
           <div id="collapselapstok" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-              <h6 class="collapse-header">Work Order : </h6>
               <a class="collapse-item" href="cards.html">Laporan Stok Masuk</a>
               <a class="collapse-item" href="buttons.html">Laporan Stok Keluar</a>
             </div>
           </div>
         </li>
 
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsekeuangan" aria-expanded="true" aria-controls="collapseTwo">
-          <i class="fas fa-chart-bar"></i>
-            <span>Keuangan</span>
-          </a>
-          <div id="collapsekeuangan" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-              <h6 class="collapse-header">Work Order : </h6>
-              <a class="collapse-item" href="cards.html">Laporan Keuangan</a>
-              <a class="collapse-item" href="buttons.html">Laporan Pajak</a>
+        @if( Auth::user()->jabatan != 2 )
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsekeuangan" aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-chart-bar"></i>
+              <span>Keuangan</span>
+            </a>
+            <div id="collapsekeuangan" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+              <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="cards.html">Laporan Keuangan</a>
+                <a class="collapse-item" href="buttons.html">Laporan Pajak</a>
+              </div>
             </div>
-          </div>
-        </li>
+          </li>
+        @endif
           
         
         <!-- Divider -->

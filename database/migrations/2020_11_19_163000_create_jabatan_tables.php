@@ -13,9 +13,9 @@ class CreateJabatanTables extends Migration
      */
     public function up()
     {
-        Schema::create('jabatan_tables', function (Blueprint $table) {
-            $table->bigIncrements('id_jabatan');
-            $table->string('nama_jabatan');
+        Schema::create('jabatans', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ class CreateJabatanTables extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jabatan_tables');
+        Schema::dropIfExists('jabatans');
     }
 }

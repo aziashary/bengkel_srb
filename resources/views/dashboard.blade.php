@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('layouts.lo_kabeng')
 
 @section('content')
 <div class="container-fluid">

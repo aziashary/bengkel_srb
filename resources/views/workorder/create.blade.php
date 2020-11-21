@@ -2,40 +2,102 @@
 
 @section('content')
     <div class="container-fluid">
-    <h3 class="mt-4">Tambah Wrok Order</h3>
+    <h4>Tambah Work Order</h4>
+    <br>
     <div class="card mb-4">
         <div class="card-body">
+            <center>
+                <h5>Data Customer</h5>
+                <hr>
+            </center>
             <form>
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        <label for="namaCustomer">Nama Customer</label>
+                        <input type="text" class="form-control" id="namaCustomer">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        <label for="jenisMobil">Jenis Mobil</label>
+                        <input type="email" class="form-control" id="jenisMobil">
                     </div>
                 </div>
             </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="npwp">NPWP</label>
+                        <input type="text" class="form-control" id="npwp">
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="kilometerAwal">Kilometer Awal</label>
+                        <input type="email" class="form-control" id="kilometerAwal">
+                    </div>
                 </div>
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="flatNo">Flat No</label>
+                        <input type="text" class="form-control" id="flatNo">
+                    </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="estimasiSelesai">Estimasi Selesai</label>
+                        <input type="email" class="form-control" id="estimasiSelesai">
+                    </div>
+                </div>
+            </div>
+
+            <br>
+            
+            <center>
+                <h5>Transaksi Work Order</h5>
+                <hr>
+            </center>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="flatNo">Flat No</label>
+                        <input type="text" class="form-control" id="flatNo">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="estimasiSelesai">Estimasi Selesai</label>
+                        <input type="email" class="form-control" id="estimasiSelesai">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Example textarea</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Cari Barang">
+              <div class="input-group-append">
+                <button class="btn btn-success" type="button">
+                  <i class="fas fa-search fa-sm"></i>
+                </button>
+              </div>
+            </div>
+            
+            <br>
+            <button type="submit" class="btn btn-success">Submit</button>
             </form>
         </div>
     </div>
