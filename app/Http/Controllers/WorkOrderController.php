@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
+use App\Barang;
 
 class WorkOrderController extends Controller
 {
@@ -13,6 +13,12 @@ class WorkOrderController extends Controller
 
     public function create()
     {
-        return view('workorder.create');
+        $diskon = Barang::all();
+        $barang = Barang::pluck('nama_barang','nama_barang')->toArray();
+        return view('workorder.create',[
+            'barang' => $barang,
+            'diskon' => $diskon,
+        ]);
     }
+    
 }

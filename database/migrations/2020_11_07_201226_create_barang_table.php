@@ -20,7 +20,7 @@ class CreateBarangTable extends Migration
             $table->integer('harga_beli');
             $table->integer('harga_jual');
             $table->integer('diskon');
-            $table->integer('stok');
+            $table->integer('stok')->nullable();
             $table->timestamps();
         });
     }
