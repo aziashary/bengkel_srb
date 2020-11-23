@@ -54,6 +54,9 @@ Route::group(['prefix' => 'stokmasuk'], function () {
 Route::group(['prefix' => 'workorder'], function () {
     Route::get('/', ['as' => 'workorder.index', 'uses' => 'WorkOrderController@index']);
     Route::get('/create', ['as' => 'workorder.create', 'uses' => 'WorkOrderController@create']);
+    Route::get('/diskon', ['uses' => 'WorkOrderController@diskon']);
+    Route::post('/keranjang', ['uses' => 'WorkOrderController@keranjang']);
+    Route::post('/table', ['as' => 'workorder.table', 'uses' => 'WorkOrderController@table']);
     // Route::post('/store', ['as' => 'jenis.store', 'uses' => 'JenisController@store']);
     // Route::get('/destroy/{id}', ['as' => 'jenis.destroy', 'uses' => 'JenisController@destroy']);
     // Route::get('/edit/{id}', ['as' => 'jenis.edit', 'uses' => 'JenisController@edit']);

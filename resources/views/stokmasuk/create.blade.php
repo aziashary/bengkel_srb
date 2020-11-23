@@ -7,15 +7,19 @@
         <div class="card-body">
             <form method="POST" action="{{ URL('/stokmasuk/store/')}}" enctype="multipart/form-data">
                     @csrf
-                <p class="h3">&nbsp;&nbsp;Stok Masuk</p>
-                    <div class="form-group">
-                    <label for="nama_barang">Nama Barang</label>
-                    <select class="form-control" id="kode_barang" name="kode_barang">
-                    @foreach ($data as $barang)
-                    <option value='{{ $barang -> kode_barang }}'>{{ $barang -> nama_barang }}</option>
-                    @endforeach
+            <center>
+                <h5>Data Stok Masuk</h5>
+                <hr>
+            </center>
+            
+            <div class="form-group">
+                <label for="nama_barang">Nama Barang</label>
+                    <select class="selectpicker" id="kode_barang" name="kode_barang">
+                        @foreach ($data as $barang)
+                        <option value='{{ $barang -> kode_barang }}'>{{ $barang -> nama_barang }}</option>
+                        @endforeach
                     </select>
-                    </div>
+            </div>
                     <div class="form-group">
                         <label for="jumlah_masuk">Jumlah</label>
                         <input type="number" class="form-control" id="jumlah" name="jumlah" placeholder="Jumlah">
@@ -23,6 +27,7 @@
                     <input type=hidden id="nama_user" name="nama_user" value="{{ Auth::user()->name }}">
                     <button type="submit" class="btn btn-primary">Submit</button>
             </form>
+           
         </div>
     </div>
 @endsection

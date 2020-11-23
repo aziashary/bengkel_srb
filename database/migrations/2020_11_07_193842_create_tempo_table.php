@@ -16,9 +16,12 @@ class CreateTempoTable extends Migration
         Schema::create('tempo', function (Blueprint $table) {
             $table->bigIncrements('id_tempo');
             $table->string('kode_barang');
-            $table->string('jumlah_beli');
+            $table->integer('jumlah');
+            $table->integer('harga');
+            $table->integer('diskon');
+            $table->text('deskripsi')->nullable();
             $table->integer('total_harga');
-            $table->string('id_user');
+            $table->string('id_users');
             $table->timestamps();
         });
     }

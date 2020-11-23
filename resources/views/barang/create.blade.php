@@ -8,7 +8,10 @@
         <div class="card-body">
             <form method="POST" action="{{ URL('/barang/store') }}" enctype="multipart/form-data">
                     @csrf
-            <p class="h3">&nbsp;&nbsp;Barang</p>
+                    <center>
+                <h5>Barang</h5>
+                <hr>
+                    </center>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                         <label for="kode_barang">Kode Barang</label>
@@ -19,9 +22,12 @@
                         <input class="form-control" type="text" id="nama_barang" name="nama_barang" placeholder="Nama Barang...">
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="kategori_barang">Kategori_Barang</label>
+                        <label for="kategori">Kategori Barang</label>
                         <select class="form-control" id="kategori" name="kategori">
-                        <option value='-'>Status</option>
+                            <option value='-'>Pilih kategori...</option>
+                            @foreach ($kategori as $key => $kategori)
+                            <option value="{{ $key }}">{{ $kategori }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="form-group col-md-6">
@@ -40,6 +46,7 @@
             </form>
         </div>
     </div>
+</div>
 @endsection
 
 

@@ -8,12 +8,14 @@
     <meta name="author" content="">
 
     <!-- Custom fonts for this template-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.18/dist/css/bootstrap-select.min.css">
     <link href="{{ asset ('assets/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="{{ asset ('assets/css/sb-admin-2.min.css') }}" rel="stylesheet">
     <link href="{{ asset ('assets/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css">
   </head>
 
   <body id="page-top">
@@ -29,7 +31,7 @@
 
         <a class="sidebar-brand d-flex align-items-center justify-content-center " href="#">
           <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fas fa-laugh-wink"></i>
+            <i class="fas fa-wrench"></i>
           </div>
           <div class="sidebar-brand-text mx-3">
             @if( Auth::user()->jabatan == 1 )
@@ -327,6 +329,73 @@
     <!-- Page level custom scripts -->
     <script src="{{ asset ('assets/js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset ('assets/js/demo/chart-pie-demo.js') }}"></script>
+
+    <!-- Page level url  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <!-- script tambahan -->
+    
+
+<!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.18/dist/js/bootstrap-select.min.js"></script>
+
+<!-- (Optional) Latest compiled and minified JavaScript translation files -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.18/dist/js/i18n/defaults-*.min.js"></script>
+    
+    <!-- script select 2 -->
+    <script>
+        $(document).ready(function(){
+            $('#kategori').select2();
+        });
+    </script>
+    <script>
+        $(document).ready(function(){
+            $('#kode_barang').select2();
+        });
+    </script>
+
+  <script type="text/javascript">
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        $(document).ready(function(){
+            $( "#nama_barang" ).autocomplete({
+                source: function( request, response ) {
+                    console.log(request.term)
+                $.ajax({
+                    url:"{{url('workorder.diskon')}}",
+                    type: 'post',
+                    dataType: "json",
+                    data: {
+                        _token: CSRF_TOKEN,
+                        cari: request.term
+                    },
+                    success: function( data ) {
+                    response( data );
+                    }
+                });
+                },
+                select: function (event, ui) {
+                $('#diskon').val(ui.item.diskon);
+                return false;
+                }
+            });
+        });
+  </script>
+  
+  <script type="text/javascript">
+	$(document).ready(function(){
+		$(".simpan-keranjang").click(function(){
+			var data = $('.form-keranjang').serialize();
+			$.ajax({
+				type: 'POST',
+				url: "{{ url('workorder.keranjang')}}",
+				data: data,
+				success: function() {
+				.load("{{ url('workorder.table')}}");
+				}
+			});
+		});
+	});
+	</script>
 
   </body>
 </html>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Barang;
+use App\Kategori;
 use DB;
 
 
@@ -15,7 +16,8 @@ class BarangController extends Controller
     }
     public function create()
     {
-        return view('barang.create');
+        $item = Kategori::pluck('nama_kategori','nama_kategori')->toArray();
+        return view('barang.create')->with('kategori', $item);
     }
     public function store(Request $request)
     {
@@ -23,7 +25,11 @@ class BarangController extends Controller
             'kode_barang' => $request->kode_barang,
             'nama_barang' => $request->nama_barang,
             'diskon' => $request->diskon,
-            'nama_user' => $request->nama_user,
+            'harga_beli' => $request->harga_beli,
+            'harga_jual' => $request->harga_beli,
+            'diskon' => $request->diskon,
+            'stok' => $request->stok,
+            'kategori_barang' => $request->kategori,
             
         ]);
         if($store){
@@ -49,6 +55,7 @@ class BarangController extends Controller
             'harga_beli' => $request->harga_beli,
             'harga_jual' => $request->harga_beli,
             'diskon' => $request->diskon,
+            'stok' => $request->stok,
             'kategori_barang' => $request->kategori,
         ]);
         if($update){

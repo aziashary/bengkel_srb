@@ -15,9 +15,8 @@ class CekStatus
      */
     public function handle($request, Closure $next)
     {
-        
-            if (auth()->user()->jabatan  == 'kasir') {
-            return $next($request);
+        if (auth()->user()->jabatan  == 'kasir') {
+        return $next($request);
     }
     return alert('error',"You don't have admin access.");
 }
