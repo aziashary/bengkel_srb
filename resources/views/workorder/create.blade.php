@@ -84,7 +84,7 @@
                 -->
                 <div class="form-group col-md-6">
                     <label for="kilometerAwal">Deskripsi</label>
-                    <input type="textbox" class="form-control" id="deskripsi" Placeholder="deskripsi..">
+                    <input type="textbox" class="form-control" id="deskripsi" name="deskripsi" Placeholder="deskripsi..">
                 </div>
                 <div class="col align-self-center">
                     <div class="col-5">

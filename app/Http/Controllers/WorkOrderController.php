@@ -43,6 +43,12 @@ class WorkOrderController extends Controller
         }
     }
 
+    public function table()
+    {
+        $item = Tempo::all();
+        return view('workorder.create')->with('data', $item);
+    }
+
     public function diskon(Request $request)
     {
         $search = $request->cari;

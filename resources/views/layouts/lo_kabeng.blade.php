@@ -354,7 +354,7 @@
         });
     </script>
 
-<script type="text/javascript">
+  <script type="text/javascript">
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         $(document).ready(function(){
             $( "#nama_barang" ).autocomplete({
@@ -380,5 +380,22 @@
             });
         });
   </script>
+  
+  <script type="text/javascript">
+	$(document).ready(function(){
+		$(".simpan-keranjang").click(function(){
+			var data = $('.form-keranjang').serialize();
+			$.ajax({
+				type: 'POST',
+				url: "{{ url('workorder.keranjang')}}",
+				data: data,
+				success: function() {
+				.load("{{ url('workorder.table')}}");
+				}
+			});
+		});
+	});
+	</script>
+
   </body>
 </html>
