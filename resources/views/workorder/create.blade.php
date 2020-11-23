@@ -1,14 +1,9 @@
 @extends('layouts.lo_kabeng')
 
 @section('content')
-<<<<<<< HEAD
     <div class="container-fluid">
     <h4>Tambah Work Order</h4>
     <br>
-=======
-<div class="container-fluid">
-    <h3 class="mt-4">Tambah Work Order</h3>
->>>>>>> 4d5962980386e1d422302e011f5eb38cd1296c9b
     <div class="card mb-4">
         <div class="card-body">
             <center>

@@ -24,7 +24,7 @@ Route::get('/welcome', 'HomeController@welcome')->name('welcome');
 // Route::get('/dashboard/sparepart', 'HomeController@sparepart')->name('sparepart');
 // Route::get('/dashboard/management', 'HomeController@management')->name('management');
 
-Route::group(['prefix' => 'barang'], function () {
+Route::group(['prefix' => 'barang', 'middleware' => 'isKabeng'], function () {
     Route::get('/', ['as' => 'barang.index', 'uses' => 'BarangController@index']);
     Route::get('/create', ['as' => 'barang.create', 'uses' => 'BarangController@create']);
     Route::get('/edit/{kode_barang}', ['uses' => 'BarangController@edit']);

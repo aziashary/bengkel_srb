@@ -19,7 +19,7 @@ class IsKabeng
             return abort(404);
         }
 
-        if (auth()->user()->jabatan != 'kepala_bengkel') {
+        if (auth()->user()->jabatan != 1) {
             return abort(404);
         }
 

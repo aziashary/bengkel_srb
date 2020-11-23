@@ -15,6 +15,14 @@ class IsManagement
      */
     public function handle($request, Closure $next)
     {
+        if (!isset(auth()->user()->jabatan)) {
+            return abort(404);
+        }
+
+        if (auth()->user()->jabatan != 3) {
+            return abort(404);
+        }
+
         return $next($request);
     }
 }
