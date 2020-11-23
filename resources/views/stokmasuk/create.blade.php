@@ -27,7 +27,7 @@
                     <input type=hidden id="nama_user" name="nama_user" value="{{ Auth::user()->name }}">
                     <button type="submit" class="btn btn-primary">Submit</button>
             </form>
-            @endforeach
+           
         </div>
     </div>
 @endsection

@@ -46,7 +46,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="estimasiSelesai">Estimasi Selesai</label>
-                        <input type="email" class="form-control" id="estimasiSelesai" Placeholder="Isi Estimasi..">
+                        <input type="email" class="form-control" id="estimasiSelesai"  Placeholder="Isi Estimasi..">
                     </div>
                 </div>
             </div>
@@ -59,32 +59,60 @@
                 <h5>Transaksi Work Order</h5>
                 <hr>
             </center>
-          
+            <form method="POST" action="{{ URL('/workorder/keranjang/')}}" enctype="multipart/form-data">
+                    @csrf
             <div class="form-row">
                 <div class="form-group col-md-12">
-                    <center><label for="barang"><h4>Pilih Barang</h4></label></center>
-                    <center><select class="form-control" id="barang" name="nama_barang">
+                    <label for="barang">Pilih Barang</label>
+                    <center><select class="form-control" id="kode_barang" name="kode_barang">
                             <option value='-'><h5>Pilih Barang...</h5></option>
-                            @foreach ($barang as $key => $b)
-                            <option value="{{ $key }}">{{ $b }}</option>
+                            @foreach ($barang as $ke => $b)
+                            <option value="{{ $ke }}">{{ $b }}</option>
                             @endforeach
                     </select></center>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-2">
                     <label for="kilometerAwal">Jumlah</label>
-                    <input type="text" class="form-control" id="jumlah_barang" Placeholder="Jumlah..">
+                    <input type="hidden" name="user" id="user" value="{{ Auth::user()->id }}">
+                    <input type="text" class="form-control" id="jumlah" name="jumlah" Placeholder="Jumlah..">
                 </div>
-                @foreach ($diskon as $i)
-                <div class="form-group col-md-3">
+               
+                <!-- <div class="form-group col-md-2">
                     <label for="kilometerAwal">Diskon</label>
-                    <input type="text" class="form-control" id="diskon" value="{{ $i->diskon }}" Placeholder="diskon..">
+                    <input type="text" class="form-control" id="diskon" >
                 </div>
-                @endforeach
-                <div class="form-group col-xl-6">
+                -->
+                <div class="form-group col-md-6">
                     <label for="kilometerAwal">Deskripsi</label>
                     <input type="textbox" class="form-control" id="deskripsi" Placeholder="deskripsi..">
                 </div>
+                <div class="col align-self-center">
+                    <div class="col-5">
+                    <button type="submit" class="btn btn-success">Masukan Keranjang</button>
+                    </div>
+                </div>
+                </form>
             </div>
+            <div class="card-header">
+            <i class="fas fa-table mr-1"></i>
+            Keranjang Barang
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                        <th>No </th>
+                        <th>Nama Barang</th>
+                        <th>Jumlah</th>
+                        <th>Total</th>
+                        <th>Deskripsi</th>
+                        <th colspan="2">action</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
             <br>
             <button type="submit" class="btn btn-success">Submit</button>
            

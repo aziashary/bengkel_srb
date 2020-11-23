@@ -333,6 +333,7 @@
     <!-- Page level url  -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
     <!-- Latest compiled and minified CSS -->
+    <!-- script tambahan -->
     
 
 <!-- Latest compiled and minified JavaScript -->
@@ -349,8 +350,35 @@
     </script>
     <script>
         $(document).ready(function(){
-            $('#barang').select2();
+            $('#kode_barang').select2();
         });
     </script>
+
+<script type="text/javascript">
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        $(document).ready(function(){
+            $( "#nama_barang" ).autocomplete({
+                source: function( request, response ) {
+                    console.log(request.term)
+                $.ajax({
+                    url:"{{url('workorder.diskon')}}",
+                    type: 'post',
+                    dataType: "json",
+                    data: {
+                        _token: CSRF_TOKEN,
+                        cari: request.term
+                    },
+                    success: function( data ) {
+                    response( data );
+                    }
+                });
+                },
+                select: function (event, ui) {
+                $('#diskon').val(ui.item.diskon);
+                return false;
+                }
+            });
+        });
+  </script>
   </body>
 </html>

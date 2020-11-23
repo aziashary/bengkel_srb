@@ -19,7 +19,7 @@ class CreateBarangTable extends Migration
             $table->string('kategori_barang');
             $table->integer('harga_beli');
             $table->integer('harga_jual');
-            $table->integer('diskon');
+            $table->integer('diskon')->nullable();
             $table->integer('stok')->nullable();
             $table->timestamps();
         });
