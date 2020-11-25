@@ -87,7 +87,7 @@
                 -->
                 <div class="form-group col-md-6">
                     <label for="kilometerAwal">Deskripsi</label>
-                    <input type="text" class="form-control" id="deskripsi" name="deskripsi" Placeholder="deskripsi..">
+                    <textarea class="form-control" id="deskripsi" name="deskripsi" Placeholder="deskripsi.."></textarea>
                 </div>
                 <div class="col align-self-center">
                     <div class="col-5">
@@ -162,7 +162,7 @@
                             "<td>"+value.total_harga+"</td>"+
                             "<td>"+value.deskripsi+"</td>"+
                             "<td><a href='javascript:void(0)' onClick='hapus("+value.id_tempo+")'>Hapus</a></td>"+
-                            "<td><a href='javascript:void(0)' onClick='edit("+value.id_tempo+")'>Edit</a></td>"+
+                            
                         "</tr>"
                         no++
                     });
