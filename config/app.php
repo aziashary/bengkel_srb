@@ -226,6 +226,13 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        //custom
+        'isKabeng' => App\Http\Middleware\isKabeng::class,
+        'isSparepart' => App\Http\Middleware\isSparepart::class,
+        'isManagement' => App\Http\Middleware\isManagement::class,
+        'isKasir' => App\Http\Middleware\isKasir::class,
+        'isBarang' => App\Http\Middleware\isBarang::class,
+
     ],
 
 ];

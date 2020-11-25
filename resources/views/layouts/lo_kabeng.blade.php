@@ -355,47 +355,47 @@
     </script>
 
   <script type="text/javascript">
-        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-        $(document).ready(function(){
-            $( "#nama_barang" ).autocomplete({
-                source: function( request, response ) {
-                    console.log(request.term)
-                $.ajax({
-                    url:"{{url('workorder.diskon')}}",
-                    type: 'post',
-                    dataType: "json",
-                    data: {
-                        _token: CSRF_TOKEN,
-                        cari: request.term
-                    },
-                    success: function( data ) {
-                    response( data );
-                    }
-                });
-                },
-                select: function (event, ui) {
-                $('#diskon').val(ui.item.diskon);
-                return false;
-                }
-            });
-        });
+        // var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        // $(document).ready(function(){
+        //     $( "#nama_barang" ).autocomplete({
+        //         source: function( request, response ) {
+        //             console.log(request.term)
+        //         $.ajax({
+        //             url:"{{url('workorder.diskon')}}",
+        //             type: 'post',
+        //             dataType: "json",
+        //             data: {
+        //                 _token: CSRF_TOKEN,
+        //                 cari: request.term
+        //             },
+        //             success: function( data ) {
+        //             response( data );
+        //             }
+        //         });
+        //         },
+        //         select: function (event, ui) {
+        //         $('#diskon').val(ui.item.diskon);
+        //         return false;
+        //         }
+        //     });
+        // });
   </script>
   
   <script type="text/javascript">
-	$(document).ready(function(){
-		$(".simpan-keranjang").click(function(){
-			var data = $('.form-keranjang').serialize();
-			$.ajax({
-				type: 'POST',
-				url: "{{ url('workorder.keranjang')}}",
-				data: data,
-				success: function() {
-				.load("{{ url('workorder.table')}}");
-				}
-			});
-		});
-	});
+	// $(document).ready(function(){
+	// 	$(".simpan-keranjang").click(function(){
+	// 		var data = $('.form-keranjang').serialize();
+	// 		$.ajax({
+	// 			type: 'POST',
+	// 			url: "{{ url('workorder.keranjang')}}",
+	// 			data: data,
+	// 			success: function() {
+	// 			.load("{{ url('workorder.table')}}");
+	// 			}
+	// 		});
+	// 	});
+	// });
 	</script>
-
+  @yield('js')
   </body>
 </html>

@@ -1,8 +1,9 @@
 @extends('layouts.lo_kabeng')
+
 @section('content')
-<title>Tambah Work Order</title> 
-<div class="container-fluid">
-    <h3 class="mt-4">Tambah Work Order</h3>
+    <div class="container-fluid">
+    <h4>Tambah Work Order</h4>
+    <br>
     <div class="card mb-4">
         <div class="card-body">
             <center>
@@ -59,17 +60,19 @@
                 <h5>Transaksi Work Order</h5>
                 <hr>
             </center>
-            <form method="POST" action="{{ URL('/workorder/keranjang/')}}" enctype="multipart/form-data">
-                    @csrf
+            <form id="form-cart">
+                @csrf
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label for="barang">Pilih Barang</label>
-                    <center><select class="form-control" id="kode_barang" name="kode_barang">
+                    <center>
+                        <select class="form-control" id="kode_barang" name="kode_barang">
                             <option value='-'><h5>Pilih Barang...</h5></option>
-                            @foreach ($barang as $ke => $b)
-                            <option value="{{ $ke }}">{{ $b }}</option>
+                            @foreach ($barang as $key => $b)
+                                <option value="{{ $key }}">{{ $b }}</option>
                             @endforeach
-                    </select></center>
+                        </select>
+                    </center>
                 </div>
                 <div class="form-group col-md-2">
                     <label for="kilometerAwal">Jumlah</label>
@@ -84,11 +87,11 @@
                 -->
                 <div class="form-group col-md-6">
                     <label for="kilometerAwal">Deskripsi</label>
-                    <input type="textbox" class="form-control" id="deskripsi" name="deskripsi" Placeholder="deskripsi..">
+                    <input type="text" class="form-control" id="deskripsi" name="deskripsi" Placeholder="deskripsi..">
                 </div>
                 <div class="col align-self-center">
                     <div class="col-5">
-                    <button type="submit" class="btn btn-success">Masukan Keranjang</button>
+                    <button type="button" class="btn btn-success" id="button-cart">Masukan Keranjang</button>
                     </div>
                 </div>
                 </form>
@@ -102,14 +105,15 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                        <th>No </th>
-                        <th>Nama Barang</th>
-                        <th>Jumlah</th>
-                        <th>Total</th>
-                        <th>Deskripsi</th>
-                        <th colspan="2">action</th>
+                            <th>No </th>
+                            <th>Nama Barang</th>
+                            <th>Jumlah</th>
+                            <th>Total</th>
+                            <th>Deskripsi</th>
+                            <th colspan="2">Action</th>
                         </tr>
                     </thead>
+                    <tbody id="data-cart"></tbody>
                 </table>
             </div>
         </div>
@@ -119,4 +123,79 @@
             </form>
         </div>
     </div>
+@endsection
+
+@section('js')
+    <script>
+        
+        $("#button-cart").click(function(){
+            var data = $("#form-cart").serialize();
+            // console.log(data)
+            $.ajax({
+                type: 'POST',
+                url: "{{ route('workorder.storeCart') }}",
+                data: data,
+                success: function(data) {
+                    $("#form-cart").get(0).reset();
+                    $("#kode_barang").select2("");
+                    tampil()
+                    console.log(data)
+                    // .load("{{ url('workorder.table')}}");
+                }
+            });
+        });
+
+        function tampil(){
+            $.ajax({
+                type: 'GET',
+                url: "{{ route('workorder.viewCart') }}",
+                success: function(data) {
+                    console.log(data)
+                    var table_value = "";
+                    var no = 1;
+                    $.each(data, function(index, value) {
+                        table_value += 
+                        "<tr>"+
+                            "<td>"+no+"</td>"+
+                            "<td>"+value.barangs.nama_barang+"</td>"+
+                            "<td>"+value.jumlah+"</td>"+
+                            "<td>"+value.total_harga+"</td>"+
+                            "<td>"+value.deskripsi+"</td>"+
+                            "<td><a href='javascript:void(0)' onClick='hapus("+value.id_tempo+")'>Hapus</a></td>"+
+                            "<td><a href='javascript:void(0)' onClick='edit("+value.id_tempo+")'>Edit</a></td>"+
+                        "</tr>"
+                        no++
+                    });
+
+                    $("#data-cart").html(table_value)
+                }
+            });
+        }
+
+        function hapus(id){
+            $.ajax({
+                type: 'DELETE',
+                url:'deleteCart/'+id,
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "id": id
+                },
+                success: function($id) {
+                    console.log($id)
+                    alert('success deleted data')
+                    tampil()
+                }
+            });
+        }
+
+        function edit(id){
+            alert(id)
+            tampil()
+        }
+
+        $(document).ready(function(){
+            tampil()
+        })
+
+    </script>
 @endsection

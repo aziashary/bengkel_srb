@@ -28,16 +28,17 @@
                         $no = 1;
                         ?>
                     <tbody>
-                    <tr>
-                    @foreach($data as $kategori)
-                        <td>{{ $no++ }}</td>
-                        <th>{{ $kategori->nama_kategori }}</th>
-                        <td>
-                            <a href="{{ URL('kategori/edit/'. $kategori->id_kategori) }}" class="btn btn-warning">Edit</a>
-                            <a href="{{ URL('kategori/delete/'. $kategori->id_kategori) }}" class="btn btn-danger">Hapus</a>
-                        </td>
-                    </tr>
-                    @endforeach
+                        @foreach($data as $kategori)
+                            <tr>
+                                <td>{{ $no++ }}</td>
+                                <td>{{ $kategori->nama_kategori }}</td>
+                                <td>
+                                    <a href="{{ URL('kategori/edit/'. $kategori->id_kategori) }}" class="btn btn-warning">Edit</a>
+                                    <a href="{{ URL('kategori/delete/'. $kategori->id_kategori) }}" class="btn btn-danger">Hapus</a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
                 </table>
             </div>
         </div>

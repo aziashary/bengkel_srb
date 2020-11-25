@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class IsKabeng
+class IsBarang
 {
     /**
      * Handle an incoming request.
@@ -19,7 +19,7 @@ class IsKabeng
             return abort(404);
         }
 
-        if (auth()->user()->jabatan != 1) {
+        if (auth()->user()->jabatan == 3 || auth()->user()->jabatan == 4) {
             return abort(404);
         }
 
