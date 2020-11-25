@@ -19,9 +19,9 @@ class CreateWorkorderTable extends Migration
             $table->integer('id_costumer');
             $table->string('no_flat');
             $table->string('model');
-            $table->string('delivery_date');
+            $table->date('delivery_date');
             $table->integer('milleage');
-            $table->date('tanggal_transaksi');
+            $table->date('estimasi_selesai');
             $table->integer('total_transaksi');
             $table->string('nama_user');
             $table->string('sales')->nullable();
