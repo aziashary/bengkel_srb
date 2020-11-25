@@ -1,4 +1,4 @@
-@extends('layouts.lo_kabeng')
+@extends('layouts.main')
 @section('content')
 <title>Tambah Stok</title> 
 <div class="container-fluid">

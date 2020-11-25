@@ -9,7 +9,7 @@
                 <h5>Data Customer</h5>
                 <hr>
             </center>
-            @foreach ($data as $invoice)
+            <!-- @foreach ($data as $invoice) -->
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
@@ -50,7 +50,7 @@
                         <input type="date" class="form-control" id="estimasiSelesai"  Placeholder="Isi Estimasi..">
                     </div>
                 </div>
-                @endforeach
+                <!-- @endforeach -->
             </div>
         </div>
     </div>

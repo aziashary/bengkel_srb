@@ -1,9 +1,10 @@
-@extends('layouts.lo_kabeng')
+@extends('layouts.main')
 
 @section('content')
     <div class="container-fluid">
     <h4>Tambah Work Order</h4>
     <br>
+    <form method="POST" action="{{ URL('/workorder/store') }}" enctype="multipart/form-data">
     <div class="card mb-4">
         <div class="card-body">
             <center>
@@ -14,13 +15,13 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="namaCustomer">Nama Customer</label>
-                        <input type="text" class="form-control" id="namaCustomer" Placeholder="Isi nama..">
+                        <input type="text" class="form-control" id="namaCustomer" name="nama_customer" Placeholder="Isi nama..">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="jenisMobil">Jenis Mobil</label>
-                        <input type="email" class="form-control" id="jenisMobil" Placeholder="Jenis Mobil..">
+                        <input type="email" class="form-control" id="jenisMobil" name="jenis_mobil" Placeholder="Jenis Mobil..">
                     </div>
                 </div>
             </div>
@@ -29,25 +30,25 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="npwp">NPWP</label>
-                        <input type="text" class="form-control" id="npwp" Placeholder="Isi NPWP..">
+                        <input type="text" class="form-control" id="npwp" name="npwp" Placeholder="Isi NPWP..">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="npwp">Flat No</label>
-                        <input type="text" class="form-control" id="flat_no" Placeholder="Flat no..">
+                        <input type="text" class="form-control" id="flat_no" name="flat_no" Placeholder="Flat no..">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="kilometerAwal">Kilometer Awal</label>
-                        <input type="email" class="form-control" id="kilometerAwal" Placeholder="Kilometer awal..">
+                        <input type="email" class="form-control" id="kilometerAwal" name="kilometer_awal" Placeholder="Kilometer awal..">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="estimasiSelesai">Estimasi Selesai</label>
-                        <input type="email" class="form-control" id="estimasiSelesai"  Placeholder="Isi Estimasi..">
+                        <input type="date" class="form-control" id="estimasiSelesai" name="estimasi_selesai"  Placeholder="Isi Estimasi..">
                     </div>
                 </div>
             </div>
@@ -122,6 +123,7 @@
            
             </form>
         </div>
+    </form>
     </div>
 @endsection
 

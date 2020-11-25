@@ -1,4 +1,4 @@
-@extends('layouts.lo_kabeng')
+@extends('layouts.main')
 @section('content')
 <div class="container-fluid">
 	<title>Table Kategori</title>
@@ -16,11 +16,11 @@
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
+                    <thead align="center">
                         <tr>
                         <th>No </th>
                         <th>Nama Kategori</th>
-                        <th colspan="2">Action</th>
+                        <th>Action</th>
 
                         </tr>
                     </thead>
@@ -32,7 +32,7 @@
                             <tr>
                                 <td>{{ $no++ }}</td>
                                 <td>{{ $kategori->nama_kategori }}</td>
-                                <td>
+                                <td align="center" width="140">
                                     <a href="{{ URL('kategori/edit/'. $kategori->id_kategori) }}" class="btn btn-warning">Edit</a>
                                     <a href="{{ URL('kategori/delete/'. $kategori->id_kategori) }}" class="btn btn-danger">Hapus</a>
                                 </td>

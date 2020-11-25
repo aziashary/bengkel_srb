@@ -1,16 +1,21 @@
 @extends('layouts.main')
 @section('content')
 <div class="container-fluid">
-	<title>Table Stok Masuk</title>
-    <h3 class="mt-4">Data Stok Masuk</h3>
+	<title>Table Work Order</title>
+    <h1 class="mt-4">Table Work Order</h1>
+    <ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item"><a href="">Dashboard</a></li>
+        <li class="breadcrumb-item">Table Work Order</li>
+    </ol>
     <div class="mb-4">
         <div class="btn-group">
-            <a href="{{ route('stok.create') }}" class="center btn btn-gradient btn-primary" title="Tambah Data">Tambah Data</i></a>
+            <a href="?page=table&action=tambah" class="center btn btn-gradient btn-primary btn-lg" title="Tambah Data">Tambah Work Order</i></a>
         </div>
+    </div>
     <div class="card mb-4">
         <div class="card-header">
             <i class="fas fa-table mr-1"></i>
-            Stok Masuk
+            Data Work Order
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -18,11 +23,11 @@
                     <thead>
                         <tr>
                         <th>No </th>
-                        <th>Nama Barang</th>
-                        <th>Kategori</th>
-                        <th>Tanggal Keluar Stok</th>
-                        <th>Jumlah Keluar Stok</th>
-                        <th>Nama</th>
+                        <th>No Work Order</th>
+                        <th>Model</th>
+                        <th>Tanggal Masuk</th>
+                        <th>Estimasi</th>
+                        <th>Pemilik</th>
                         </tr>
                     </thead>
                     <tbody>
