@@ -8,9 +8,9 @@
     <meta name="author" content="">
 
     <!-- Custom fonts for this template-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.18/dist/css/bootstrap-select.min.css">
     <link href="{{ asset ('assets/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.18/dist/css/bootstrap-select.min.css">
 
     <!-- Custom styles for this template-->
     <link href="{{ asset ('assets/css/sb-admin-2.min.css') }}" rel="stylesheet">
@@ -51,7 +51,7 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <a class="nav-link" href="{{ route('dashboard') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
         </li>
@@ -322,13 +322,11 @@
     <script src="{{ asset ('assets/js/sb-admin-2.min.js') }}"></script>
 
     <!-- Page level plugins -->
-    <script src="{{ asset ('assets/vendor/chart.js/Chart.min.js') }}"></script>
-    <script src="{{ asset ('vendor/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset ('vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset ('assets/vendor/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset ('assets/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
 
     <!-- Page level custom scripts -->
-    <script src="{{ asset ('assets/js/demo/chart-area-demo.js') }}"></script>
-    <script src="{{ asset ('assets/js/demo/chart-pie-demo.js') }}"></script>
+    <script src="{{ asset ('assets/js/demo/datatables-demo.js') }}"></script>
 
     <!-- Page level url  -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
@@ -336,11 +334,11 @@
     <!-- script tambahan -->
     
 
-<!-- Latest compiled and minified JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.18/dist/js/bootstrap-select.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.18/dist/js/bootstrap-select.min.js"></script>
 
-<!-- (Optional) Latest compiled and minified JavaScript translation files -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.18/dist/js/i18n/defaults-*.min.js"></script>
+    <!-- (Optional) Latest compiled and minified JavaScript translation files -->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.18/dist/js/i18n/defaults-*.min.js"></script>
     
     <!-- script select 2 -->
     <script>
@@ -354,48 +352,7 @@
         });
     </script>
 
-  <script type="text/javascript">
-        // var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-        // $(document).ready(function(){
-        //     $( "#nama_barang" ).autocomplete({
-        //         source: function( request, response ) {
-        //             console.log(request.term)
-        //         $.ajax({
-        //             url:"{{url('workorder.diskon')}}",
-        //             type: 'post',
-        //             dataType: "json",
-        //             data: {
-        //                 _token: CSRF_TOKEN,
-        //                 cari: request.term
-        //             },
-        //             success: function( data ) {
-        //             response( data );
-        //             }
-        //         });
-        //         },
-        //         select: function (event, ui) {
-        //         $('#diskon').val(ui.item.diskon);
-        //         return false;
-        //         }
-        //     });
-        // });
-  </script>
-  
-  <script type="text/javascript">
-	// $(document).ready(function(){
-	// 	$(".simpan-keranjang").click(function(){
-	// 		var data = $('.form-keranjang').serialize();
-	// 		$.ajax({
-	// 			type: 'POST',
-	// 			url: "{{ url('workorder.keranjang')}}",
-	// 			data: data,
-	// 			success: function() {
-	// 			.load("{{ url('workorder.table')}}");
-	// 			}
-	// 		});
-	// 	});
-	// });
-	</script>
-  @yield('js')
+    @yield('js')
+
   </body>
 </html>

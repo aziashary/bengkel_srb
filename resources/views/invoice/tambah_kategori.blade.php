@@ -1,4 +1,4 @@
-@extends('layouts.lo_kabeng')
+@extends('layouts.main')
 <div class="container-fluid">
 <h1 class="mt-4">Tambah Barang</h1>
     <ol class="breadcrumb mb-4">

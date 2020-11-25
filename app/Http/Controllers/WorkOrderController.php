@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Barang;
 use App\Tempo;
 use DB;
@@ -46,7 +47,8 @@ class WorkOrderController extends Controller
 
     public function viewCart()
     {
-        $data = Tempo::with('barangs')->get();
+        $id = Auth::id();
+        $data = Tempo::where('id_users', $id)->with('barangs')->get();
 
         return response()->json($data);
     }

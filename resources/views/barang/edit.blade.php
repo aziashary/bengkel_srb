@@ -1,4 +1,4 @@
-@extends('layouts.lo_kabeng')
+@extends('layouts.main')
 @section('content')
 <title>Edit Barang</title> 
     <div class="container-fluid">
