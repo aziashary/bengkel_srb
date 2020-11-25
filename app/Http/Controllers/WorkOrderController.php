@@ -16,14 +16,52 @@ class WorkOrderController extends Controller
     public function create()
     {
         $barang = Barang::pluck('nama_barang','kode_barang')->toArray();
+        $cart = Tempo::all();
+
         return view('workorder.create',[
             'barang' => $barang,
+            'cart' => $cart,
         ]);
     }
 
+    public function storeCart(Request $request){
+        $harga = Barang::where('kode_barang', $request->kode_barang)->select('harga_jual')->value('harga_jual');
+        $diskon = Barang::where('kode_barang', $request->kode_barang)->select('diskon')->value('diskon');
+        $total = $harga * $request->jumlah;
+
+        $store = Tempo::create([
+            'kode_barang' => $request->kode_barang,
+            'jumlah' => $request->jumlah,
+            'deskripsi' => $request->deskripsi,
+            'diskon' => $diskon,
+            'harga' => $harga,
+            'total_harga' => $total,
+            'id_users' => $request->user,
+        ]);
+
+        if($store){
+            return response()->json(['success']);
+        }
+    }
+
+    public function viewCart()
+    {
+        $data = Tempo::with('barangs')->get();
+
+        return response()->json($data);
+    }
+
+    public function deleteCart($id)
+    {
+        $destroy = Tempo::where('id_tempo',$id)->delete();
+
+        if($destroy){
+            return response()->json(['success']);
+        }
+    }
+    
     public function keranjang(Request $request)
     {
-
         $harga = Barang::where('kode_barang', $request->kode_barang)->select('harga_jual')->value('harga_jual');
         $diskon = Barang::where('kode_barang', $request->kode_barang)->select('diskon')->value('diskon');
         $total = $harga * $request->jumlah;
@@ -43,11 +81,6 @@ class WorkOrderController extends Controller
         }
     }
 
-    public function table()
-    {
-        $item = Tempo::all();
-        return view('workorder.create')->with('data', $item);
-    }
 
     public function diskon(Request $request)
     {

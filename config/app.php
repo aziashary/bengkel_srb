@@ -231,6 +231,7 @@ return [
         'isSparepart' => App\Http\Middleware\isSparepart::class,
         'isManagement' => App\Http\Middleware\isManagement::class,
         'isKasir' => App\Http\Middleware\isKasir::class,
+        'isBarang' => App\Http\Middleware\isBarang::class,
 
     ],
 
