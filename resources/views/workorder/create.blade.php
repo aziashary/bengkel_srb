@@ -1,60 +1,10 @@
 @extends('layouts.main')
 
 @section('content')
-    <div class="container-fluid">
+<div class="container-fluid">
     <h4>Tambah Work Order</h4>
     <br>
-    <form method="POST" action="{{ URL('/workorder/store') }}" enctype="multipart/form-data">
-    <div class="card mb-4">
-        <div class="card-body">
-            <center>
-                <h5>Data Customer</h5>
-                <hr>
-            </center>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="namaCustomer">Nama Customer</label>
-                        <input type="text" class="form-control" id="namaCustomer" name="nama_customer" Placeholder="Isi nama..">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="jenisMobil">Jenis Mobil</label>
-                        <input type="email" class="form-control" id="jenisMobil" name="jenis_mobil" Placeholder="Jenis Mobil..">
-                    </div>
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="npwp">NPWP</label>
-                        <input type="text" class="form-control" id="npwp" name="npwp" Placeholder="Isi NPWP..">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="npwp">Flat No</label>
-                        <input type="text" class="form-control" id="flat_no" name="flat_no" Placeholder="Flat no..">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="kilometerAwal">Kilometer Awal</label>
-                        <input type="email" class="form-control" id="kilometerAwal" name="kilometer_awal" Placeholder="Kilometer awal..">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="estimasiSelesai">Estimasi Selesai</label>
-                        <input type="date" class="form-control" id="estimasiSelesai" name="estimasi_selesai"  Placeholder="Isi Estimasi..">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-            <br>
     <div class="card mb-4">
         <div class="card-body">       
             <center>
@@ -118,13 +68,93 @@
                 </table>
             </div>
         </div>
+           
+                </form>
+                </div>
+            </div>
+        </div>
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <center>
+                <h5>Data Customer</h5>
+                <hr>
+            </center>
+            <form method="POST" action="{{ URL('/workorder/store') }}" enctype="multipart/form-data">
+            @csrf           
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="namaCustomer">Nama Customer</label>
+                        <input type="text" class="form-control" id="namaCustomer" name="nama_customer" Placeholder="Isi nama..">
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="jenisMobil">Jenis Mobil</label>
+                        <input type="text" class="form-control" id="model" name="model" Placeholder="Jenis Mobil..">
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="namaCustomer">Alamat</label>
+                        <textarea class="form-control" id="alamat" name="alamat" Placeholder="Alamat..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="npwp">NPWP</label>
+                        <input type="text" class="form-control" id="npwp" name="npwp" Placeholder="Isi NPWP..">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="npwp">Flat No</label>
+                        <input type="text" class="form-control" id="flat_no" name="flat_no" Placeholder="Flat no..">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="npwp">Jarak Tempuh</label>
+                        <input type="number" class="form-control" id="milleage" name="milleage" Placeholder="Flat no..">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="kilometerAwal">Kilometer Awal</label>
+                        <input type="text" class="form-control" id="kilometerAwal" name="kilometer_awal" Placeholder="Kilometer awal..">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="estimasiSelesai">Tanggal Masuk</label>
+                        <input type="date" class="form-control" id="estimasiSelesai" name="delivery_date"  Placeholder="Isi Estimasi..">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="estimasiSelesai">Estimasi Selesai</label>
+                        <input type="date" class="form-control" id="estimasiSelesai" name="estimasi_selesai"  Placeholder="Isi Estimasi..">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="estimasiSelesai">Sales</label>
+                        <input type="text" class="form-control" id="sales" name="sales"  Placeholder="Sales.." >
+                    </div>
+                </div>
+            </div>
             <br>
             <button type="submit" class="btn btn-success">Submit</button>
-           
-            </form>
-        </div>
-    </form>
+        </div> 
+        </form>
     </div>
+            <br>
+    
 @endsection
 
 @section('js')

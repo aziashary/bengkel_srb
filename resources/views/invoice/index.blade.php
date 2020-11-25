@@ -1,4 +1,4 @@
-@extends('layouts.lo_kabeng')
+@extends('layouts.main')
 
 @section('content')
 <div class="container-fluid">
@@ -28,34 +28,11 @@
                         <th>No Work Order</th>
                         <th>Model</th>
                         <th>Tanggal Masuk</th>
-                        <th>Estimasi Selesai</th>
-                        <th>Estimasi Harga</th>
+                        <th>Estimasi</th>
                         <th>Pemilik</th>
-                        <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                    <?php
-                        $no = 1;
-                        ?>
-                        <tbody>
-                            <!-- @foreach($data as $invoice)
-                            <tr>
-                                <td>{{ $no++ }}</td>
-                                <th>{{ $invoice->no_invoice }}</th>
-                                <td>{{ $invoice->no_invoice }}</td>
-                                <td>{{ $invoice->model }}</td>
-                                <td>Rp. {{ $invoice->tanggal_masuk }}</td>
-                                <td>Rp. {{ $invoice->estimasi_selesai }}</td>
-                                <td>Rp. {{ $invoice->total_transaksi}}</td>
-                                <td>{{ $invoice->nama_costumer }} %</td>
-                                
-                                <td>
-                                <a href="{{ URL('invoice/edit/'. $invoice->id_invoice) }}" class="btn btn-warning">Edit</a>
-                                <a href="{{ URL('invoice/delete/'. $invoice->id_invoice) }}" class="btn btn-danger">Hapus</a>
-                                </td>
-                            </tr>
-                            @endforeach -->
                   
                 </table>
             </div>

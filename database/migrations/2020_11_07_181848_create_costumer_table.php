@@ -16,7 +16,7 @@ class CreateCostumerTable extends Migration
         Schema::create('costumer', function (Blueprint $table) {
             $table->bigIncrements('id_costumer');
             $table->string('no_workorder');
-            $table->string('no_invoice');
+            $table->string('no_invoice')->nullable();
             $table->string('nama_costumer');
             $table->text('alamat');
             $table->string('npwp')->nullable();

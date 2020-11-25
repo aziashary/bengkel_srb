@@ -18,6 +18,7 @@ class CreateSubworkorderTable extends Migration
             $table->integer('id_workorder');
             $table->integer('kode_barang');
             $table->integer('jumlah');
+            $table->integer('harga');
             $table->integer('diskon');
             $table->integer('total');
             $table->text('deskripsi')->nullable();
