@@ -3,6 +3,7 @@
 @section('content')
 <div class="container-fluid">
 	<title>Table Barang</title>
+    <h3 class="mt-4">Data Barang</h3>
     <div class="mb-4">
         <div class="btn-group">
             <a href="{{ route('barang.create') }}" class="center btn btn-gradient btn-primary" title="Tambah Data">Tambah Data</i></a>

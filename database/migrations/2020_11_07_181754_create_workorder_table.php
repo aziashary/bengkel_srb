@@ -21,6 +21,7 @@ class CreateWorkorderTable extends Migration
             $table->string('model');
             $table->date('delivery_date');
             $table->integer('milleage');
+            $table->integer('kilometer_awal');
             $table->date('estimasi_selesai');
             $table->integer('total_transaksi');
             $table->string('nama_user');

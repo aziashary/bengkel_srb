@@ -2,13 +2,13 @@
 
 @section('content')
 <div class="container-fluid">
-    <h4>Tambah Invoice</h4>
+    <h4>Tambah Work Order</h4>
     <br>
 
     <div class="card mb-4">
         <div class="card-body">       
             <center>
-                <h5>Transaksi Invoice</h5>
+                <h5>Transaksi Work Order</h5>
                 <hr>
             </center>
             <form id="form-cart">

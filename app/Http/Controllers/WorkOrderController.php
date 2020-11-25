@@ -52,6 +52,7 @@ class WorkOrderController extends Controller
             'id_costumer' => $id_customer,
             'no_flat' => $request->flat_no, 
             'model' => $request->model, 
+            'kilometer_awal' => $request->kilometer_awal,
             'delivery_date'  => $request->delivery_date,
             'milleage' => $request->milleage,
             'estimasi_selesai' => $request->estimasi_selesai, 

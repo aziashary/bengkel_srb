@@ -3,10 +3,10 @@
 @section('content')
 <div class="container-fluid">
 	<title>Table Work Order</title>
-    <h1 class="mt-4">Table Work Order</h1>
+    <h3 class="mt-4">Data Work Order</h3>
     <div class="mb-4">
         <div class="btn-group">
-            <a href="?page=table&action=tambah" class="center btn btn-gradient btn-primary btn-lg" title="Tambah Data">Tambah Work Order</i></a>
+            <a href="{{ route('workorder.create') }}" class="center btn btn-gradient btn-primary" title="Tambah Data">Tambah Data</i></a>
         </div>
     </div>
     <div class="card mb-4">
@@ -28,7 +28,6 @@
                         <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody>
                     <?php
                         $no = 1;
                         ?>
@@ -48,7 +47,6 @@
                             </tr>
                         @endforeach
                     </tbody>
-                  
                 </table>
             </div>
         </div>
