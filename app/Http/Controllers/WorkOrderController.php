@@ -19,6 +19,7 @@ class WorkOrderController extends Controller
         ->join('costumer', 'costumer.no_workorder', '=', 'workorder.no_workorder')
         ->groupBy('workorder.id_workorder', 'workorder.no_workorder', 'workorder.model', 'workorder.delivery_date', 'workorder.estimasi_selesai','costumer.nama_costumer')
         ->get();
+
         return view('workorder.index')->with('data', $item);
     }
 
@@ -45,7 +46,6 @@ class WorkOrderController extends Controller
             'alamat' => $request->alamat,
             'npwp'=> $request->npwp,
         ]);
-
         $id_customer = Costumer::where('no_workorder', $trx)->select('id_costumer')->value('id_costumer');
         $workorder = WorkOrder::create([
             'no_workorder' => $trx,
@@ -60,23 +60,23 @@ class WorkOrderController extends Controller
             'nama_user'=>  $nama,
             'sales' => $request->sales,
         ]);
-        
         $item = Tempo::where('id_users', $trx)->with('barangs')->get(); 
 		foreach ($item as $barang) {
-        $store = SubWorkOrder::create([
-            'id_workorder' => $barang->kode_barang,
-            'kode_barang' => $barang->kode_barang,
-            'jumlah' => $barang->jumlah,
-            'deskripsi' => $barang->deskripsi,
-            'harga' => $barang->harga,
-            'diskon' => $barang->diskon,
-            'total' => $barang->kode_barang,
-            'tanggal_transaksi'=> $request->delivery_date, 
-            'no_workorder'=> $trx,
-        ]);
+            $store = SubWorkOrder::create([
+                'id_workorder' => $barang->kode_barang,
+                'kode_barang' => $barang->kode_barang,
+                'jumlah' => $barang->jumlah,
+                'deskripsi' => $barang->deskripsi,
+                'harga' => $barang->harga,
+                'diskon' => $barang->diskon,
+                'total' => $barang->kode_barang,
+                'tanggal_transaksi'=> $request->delivery_date, 
+                'no_workorder'=> $trx,
+            ]);
         
-        $destroy = Tempo::where('id_users', $trx)->delete();
+            $destroy = Tempo::where('id_users', $trx)->delete();
         }
+
         if($store){
             return redirect('/workorder')->with('message_store','Berhasil menambahkan barang');
         }else{
@@ -96,10 +96,9 @@ class WorkOrderController extends Controller
             'diskon' => $diskon,
             'harga' => $harga,
             'total_harga' => $total,
-            'id_users' => $request->user,
+            // 'id_users' => $request->user,
+            'id_users' => Auth::user()->id,
         ]);
-
-        
 
         if($store){
             return response()->json(['success']);
