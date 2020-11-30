@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid">
 	<title>Table Barang</title>
-    <h3 class="mt-4">Data Barang</h3>
+    <!-- <h3 class="mt-4">Data Barang</h3> -->
     <div class="mb-4">
         <div class="btn-group">
             <a href="{{ route('barang.create') }}" class="center btn btn-gradient btn-primary" title="Tambah Data">Tambah Data</i></a>
@@ -38,7 +38,7 @@
                     <tbody>
                         @foreach($data as $key => $barang)
                         <tr>
-                            <td>{{ $key+1 }}</td>
+                            <td align="center">{{ $key+1 }}</td>
                             <th>{{ $barang->kode_barang }}</th>
                             <td>{{ $barang->nama_barang }}</td>
                             <td>{{ $barang->kategori_barang }}</td>

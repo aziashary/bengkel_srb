@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
@@ -51,16 +51,18 @@ Route::group(['middleware' => 'isBarang'], function () {
     });
 });
 
-Route::group(['prefix' => 'workorder'], function () {
-    Route::get('/', ['as' => 'workorder.index', 'uses' => 'WorkOrderController@index']);
-    Route::get('/create', ['as' => 'workorder.create', 'uses' => 'WorkOrderController@create']);
-    Route::post('/storeCart', ['as' => 'workorder.storeCart', 'uses' => 'WorkOrderController@storeCart']);
-    Route::get('/viewCart', ['as' => 'workorder.viewCart', 'uses' => 'WorkOrderController@viewCart']);
-    Route::delete('/deleteCart/{id}', ['uses' => 'WorkOrderController@deleteCart']);
-    Route::get('/diskon', ['uses' => 'WorkOrderController@diskon']);
-    Route::post('/store', ['uses' => 'WorkOrderController@store']);
-    // Route::post('/store', ['as' => 'jenis.store', 'uses' => 'JenisController@store']);
-    // Route::get('/destroy/{id}', ['as' => 'jenis.destroy', 'uses' => 'JenisController@destroy']);
-    // Route::get('/edit/{id}', ['as' => 'jenis.edit', 'uses' => 'JenisController@edit']);
-    // Route::patch('/update/{id}', ['as' => 'jenis.update', 'uses' => 'JenisController@update']);
+Route::group(['middleware' => 'isBarang'], function () {
+    Route::group(['prefix' => 'workorder'], function () {
+        Route::get('/', ['as' => 'workorder.index', 'uses' => 'WorkOrderController@index']);
+        Route::get('/create', ['as' => 'workorder.create', 'uses' => 'WorkOrderController@create']);
+        Route::post('/storeCart', ['as' => 'workorder.storeCart', 'uses' => 'WorkOrderController@storeCart']);
+        Route::get('/viewCart', ['as' => 'workorder.viewCart', 'uses' => 'WorkOrderController@viewCart']);
+        Route::delete('/deleteCart/{id}', ['uses' => 'WorkOrderController@deleteCart']);
+        Route::get('/diskon', ['uses' => 'WorkOrderController@diskon']);
+        Route::post('/store', ['uses' => 'WorkOrderController@store']);
+        // Route::post('/store', ['as' => 'jenis.store', 'uses' => 'JenisController@store']);
+        // Route::get('/destroy/{id}', ['as' => 'jenis.destroy', 'uses' => 'JenisController@destroy']);
+        // Route::get('/edit/{id}', ['as' => 'jenis.edit', 'uses' => 'JenisController@edit']);
+        // Route::patch('/update/{id}', ['as' => 'jenis.update', 'uses' => 'JenisController@update']);
+    });
 });

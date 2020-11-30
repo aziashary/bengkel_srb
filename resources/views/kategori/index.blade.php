@@ -2,7 +2,7 @@
 @section('content')
 <div class="container-fluid">
 	<title>Table Kategori</title>
-    <h3 class="mt-4">Data Kategori</h3>
+    <!-- <h3 class="mt-4">Data Kategori</h3> -->
     <div class="mb-4">
         <div class="btn-group">
             <a href="{{ route('kategori.create') }}" class="center btn btn-gradient btn-primary" title="Tambah Data">Tambah Data</i></a>
@@ -24,13 +24,10 @@
 
                         </tr>
                     </thead>
-                    <?php
-                        $no = 1;
-                        ?>
                     <tbody>
-                        @foreach($data as $kategori)
+                        @foreach($data as $key => $kategori)
                             <tr>
-                                <td>{{ $no++ }}</td>
+                                <td align="center" width="50">{{ $key+1 }}</td>
                                 <td>{{ $kategori->nama_kategori }}</td>
                                 <td align="center" width="140">
                                     <a href="{{ URL('kategori/edit/'. $kategori->id_kategori) }}" class="btn btn-warning">Edit</a>

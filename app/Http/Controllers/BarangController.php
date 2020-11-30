@@ -14,11 +14,13 @@ class BarangController extends Controller
         $item = Barang::all();
         return view('barang.index')->with('data', $item);
     }
+
     public function create()
     {
-        $item = Kategori::pluck('nama_kategori','nama_kategori')->toArray();
-        return view('barang.create')->with('kategori', $item);
+        $kategori = Kategori::pluck('nama_kategori','nama_kategori')->toArray();
+        return view('barang.create')->with('kategori', $kategori);
     }
+
     public function store(Request $request)
     {
         $store = Barang::create([
@@ -32,19 +34,23 @@ class BarangController extends Controller
             'kategori_barang' => $request->kategori,
             
         ]);
+
         if($store){
-            return redirect('/barang')->with('message_store','Berhasil menambahkan barang');
+            return redirect('/barang')->with('success','Berhasil menambahkan barang');
         }else{
-            return back('/barang')->with('message_store','Gagal menambahkan barang');
+            return back()->with('error','Gagal menambahkan barang');
         }
     }
 
     public function edit($kode_barang)
     {
-        $item = DB::table('barang')
-        ->where('barang.kode_barang','=',$kode_barang)
-        ->get();
-        return view('barang.edit')->with('data', $item);
+        $item = Barang::where('barang.kode_barang', $kode_barang)->get();
+        $kategori = Kategori::pluck('nama_kategori','nama_kategori')->toArray();
+
+        return view('barang.edit', [
+            'data' => $item,
+            'kategori' => $kategori
+        ]);
     }
 
     public function update(Request $request, $kode_barang)
@@ -58,17 +64,20 @@ class BarangController extends Controller
             'stok' => $request->stok,
             'kategori_barang' => $request->kategori,
         ]);
+
         if($update){
-            return redirect('/barang')->with('message_store','Berhasil update ');
+            return redirect('/barang')->with('success','Berhasil update barang');
         }else{
-            return back('/barang')->with('message_store','Gagal update ');
+            return back()->with('error','Gagal update barang');
         }
     }
 
     public function delete($kode_barang)
     {
         $destroy = Barang::where('kode_barang',$kode_barang)->delete();
-        return redirect('/barang');
+
+        if($destroy)
+        return redirect('/barang')->with('success','Berhasil menghapus barang');;
     }
 
 }

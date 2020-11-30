@@ -13,27 +13,28 @@ class KategoriController extends Controller
         $item = Kategori::all();
         return view('kategori.index')->with('data', $item);
     }
+
     public function create()
     {
         return view('kategori.create');
     }
+
     public function store(Request $request)
     {
         $store = Kategori::create([
             'nama_kategori' => $request->nama_kategori,
         ]);
         if($store){
-            return redirect('/kategori')->with('message_store','Berhasil menambahkan kategori');
+            return redirect('/kategori')->with('success','Berhasil menambahkan kategori');
         }else{
-            return back('/kategori')->with('message_store','Gagal menambahkan kategori');
+            return back()->with('error','Gagal menambahkan kategori');
         }
     }
 
     public function edit($id_kategori)
     {
-        $item = DB::table('kategori')
-        ->where('kategori.id_kategori','=',$id_kategori)
-        ->get();
+        $item = Kategori::where('kategori.id_kategori','=',$id_kategori)->get();
+
         return view('kategori.edit')->with('data', $item);
     }
 
@@ -42,17 +43,18 @@ class KategoriController extends Controller
         $update = Kategori::where('id_kategori', $id_kategori)->update([
             'nama_kategori' => $request->nama_kategori,
         ]);
+
         if($update){
-            return redirect('/kategori')->with('message_store','Berhasil update ');
+            return redirect('/kategori')->with('success','Berhasil update kategori');
         }else{
-            return back('/kategori')->with('message_store','Gagal update ');
+            return back()->with('error','Gagal update ');
         }
     }
 
     public function delete($id_kategori)
     {
         $destroy = Kategori::where('id_kategori',$id_kategori)->delete();
-        return redirect('/kategori');
-    }
 
+        return redirect('/kategori')->with('success','Berhasil menghapus kategori');
+    }
 }
