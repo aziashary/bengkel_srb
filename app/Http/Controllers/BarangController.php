@@ -61,7 +61,7 @@ class BarangController extends Controller
             'harga_beli' => $request->harga_beli,
             'harga_jual' => $request->harga_jual,
             'diskon' => $request->diskon,
-            'stok' => $request->stok,
+            // 'stok' => $request->stok,
             'kategori_barang' => $request->kategori,
         ]);
 
