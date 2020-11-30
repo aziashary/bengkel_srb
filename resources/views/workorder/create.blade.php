@@ -15,11 +15,11 @@
             @csrf
             <div class="form-row">
                 <div class="form-group col-md-4">
-                    <label for="barang">Pilih Barang</label>
+                    <label for="kode_barang">Pilih Barang</label>
                         <select class="form-control" id="kode_barang" name="kode_barang">
                             <option value='-'><h5>Pilih Barang</h5></option>
-                            @foreach ($barang as $key => $b)
-                                <option value="{{ $key }}">{{ $b }}</option>
+                            @foreach ($barang as $key => $item)
+                                <option value="{{ $item->kode_barang }}">{{ $item->nama_barang }} - stok ({{ $item->stok }})</option>
                             @endforeach
                         </select>
                 </div>
@@ -31,7 +31,8 @@
                
                 <div class="form-group col-md-2">
                     <label for="kilometerAwal">Diskon</label>
-                    <input type="text" class="form-control" id="diskon" >
+                    <input type="hidden" class="form-control" id="stok">
+                    <input type="text" class="form-control" id="diskon">
                 </div>
                
                 <div class="form-group col-md-12">
@@ -167,9 +168,14 @@
 @section('js')
     <script>
         
+        $('#kode_barang').change(function () {
+            var data = $(this).val();
+            console.log(data)
+        })
         $("#button-cart").click(function(){
             var data = $("#form-cart").serialize();
-            // console.log(data)
+            console.log(1, data)
+
             $.ajax({
                 type: 'POST',
                 url: "{{ route('workorder.storeCart') }}",
@@ -179,7 +185,7 @@
                     $("#kode_barang").select2("");
                     tampil()
                     
-                    console.log(123, data)
+                    console.log(2, data)
                     // .load("{{ url('workorder.table')}}");
                 }
             });
@@ -243,5 +249,11 @@
             tampil()
         })
 
+    </script>
+
+    <script>
+        $(document).ready(function(){
+            $('#kode_barang').select2();
+        });
     </script>
 @endsection

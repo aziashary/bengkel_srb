@@ -365,12 +365,6 @@
       <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.18/dist/js/i18n/defaults-*.min.js"></script>
     
     <!-- script select 2 -->
-    
-    <script>
-        $(document).ready(function(){
-            $('#kode_barang').select2();
-        });
-    </script>
 
     @yield('js')
 

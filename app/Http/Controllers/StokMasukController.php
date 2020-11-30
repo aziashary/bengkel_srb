@@ -36,9 +36,9 @@ class StokMasukController extends Controller
         ]);
 
         if($store){
-            return redirect('/stokmasuk')->with('message_store','Berhasil menambahkan Stok Masuk');
+            return redirect('/stokmasuk')->with('success','Berhasil menambahkan Stok Masuk');
         }else{
-            return back('/stokmasuk')->with('message_store','Gagal menambahkan Stok Masuk');
+            return back()->with('error','Gagal menambahkan Stok Masuk');
         }
     }
 
@@ -59,9 +59,9 @@ class StokMasukController extends Controller
             'nama_user' => $request->nama_user,
         ]);
         if($update){
-            return redirect('/stokmasuk')->with('message_store','Berhasil update ');
+            return redirect('/stokmasuk')->with('success','Berhasil update ');
         }else{
-            return back('/stokmasuk')->with('message_store','Gagal update ');
+            return back()->with('error','Gagal update ');
         }
     }
 

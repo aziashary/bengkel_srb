@@ -25,10 +25,10 @@ class WorkOrderController extends Controller
 
     public function create()
     {
-        $trx= Auth::user()->id;
-        $barang = Barang::pluck('nama_barang','kode_barang')->toArray();
+        $trx = Auth::user()->id;
+        $barang = Barang::all();
         $cart = Tempo::all();
-        $destroy = Tempo::where('id_users', $trx)->delete();
+        // $destroy = Tempo::where('id_users', $trx)->delete();
 
         return view('workorder.create',[
             'barang' => $barang,
@@ -38,8 +38,8 @@ class WorkOrderController extends Controller
 
     public function store(Request $request)
     {
-        $trx= Auth::user()->id;
-        $nama= Auth::user()->name;
+        $trx = Auth::user()->id;
+        $nama = Auth::user()->name;
         $costumer = Costumer::create([
             'no_workorder' => $trx,
             'nama_costumer' => $request->nama_customer,
@@ -78,9 +78,9 @@ class WorkOrderController extends Controller
         }
 
         if($store){
-            return redirect('/workorder')->with('message_store','Berhasil menambahkan barang');
+            return redirect('/workorder')->with('success','Berhasil menambahkan work order');
         }else{
-            return back('/workorder')->with('message_store','Gagal menambahkan barang');
+            return back()->with('message_store','Gagal menambahkan work order');
         }
     }
 
