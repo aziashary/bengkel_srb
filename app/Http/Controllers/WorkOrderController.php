@@ -80,7 +80,7 @@ class WorkOrderController extends Controller
         if($store){
             return redirect('/workorder')->with('success','Berhasil menambahkan work order');
         }else{
-            return back()->with('message_store','Gagal menambahkan work order');
+            return back()->with('error','Gagal menambahkan work order');
         }
     }
 
