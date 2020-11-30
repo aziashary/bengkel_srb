@@ -16,6 +16,7 @@ class WorkOrder extends Model
         'delivery_date',
         'milleage',
         'estimasi_selesai',
+        'kilometer_awal',
         'total_transaksi',
         'nama_user',
         'sales'

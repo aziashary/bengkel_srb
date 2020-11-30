@@ -12,41 +12,39 @@
                 <hr>
             </center>
             <form id="form-cart">
-                @csrf
-            <div class="form-row">
-                <div class="form-group col-md-12">
+                @csrf {{ method_field('PATCH') }}
+                <div class="form-row">
+                <div class="form-group col-md-4">
                     <label for="barang">Pilih Barang</label>
-                    <center>
                         <select class="form-control" id="kode_barang" name="kode_barang">
-                            <option value='-'><h5>Pilih Barang...</h5></option>
+                            <option value='-'><h5>Pilih Barang</h5></option>
                             @foreach ($barang as $key => $b)
                                 <option value="{{ $key }}">{{ $b }}</option>
                             @endforeach
                         </select>
-                    </center>
                 </div>
                 <div class="form-group col-md-2">
                     <label for="kilometerAwal">Jumlah</label>
-                    <input type="hidden" name="user" id="user" value="{{ Auth::user()->id }}">
-                    <input type="text" class="form-control" id="jumlah" name="jumlah" value="{{ $invoice-> jumlah }}" Placeholder="Jumlah..">
+                    <!-- <input type="hidden" name="user" id="user" value="{{ Auth::user()->id }}"> -->
+                    <input type="text" class="form-control" id="jumlah" name="jumlah" Placeholder="Masukan jumlah barang">
                 </div>
                
-                <!-- <div class="form-group col-md-2">
+                <div class="form-group col-md-2">
                     <label for="kilometerAwal">Diskon</label>
                     <input type="text" class="form-control" id="diskon" >
                 </div>
-                -->
-                <div class="form-group col-md-6">
+               
+                <div class="form-group col-md-12">
                     <label for="kilometerAwal">Deskripsi</label>
-                    <textarea class="form-control" value="{{ $invoice-> deskripsi }}" id="deskripsi" name="deskripsi" Placeholder="deskripsi.."></textarea>
+                    <textarea class="form-control" id="deskripsi" name="deskripsi" Placeholder="Masukan deskripsi"></textarea>
                 </div>
+                
                 <div class="col align-self-center">
-                    <div class="col-5">
                     <button type="button" class="btn btn-success" id="button-cart">Masukan Keranjang</button>
-                    </div>
                 </div>
                 </form>
             </div>
+            <br>
             <div class="card-header">
             <i class="fas fa-table mr-1"></i>
             Keranjang Barang
@@ -68,6 +66,16 @@
                 </table>
             </div>
         </div>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label for="kilometerAwal">Total Transaksi</label>
+                <input type="text" class="form-control" id="total" >
+            </div>
+            <div class="form-group col-md-6">
+                <label for="kilometerAwal">Estimasi Harga</label>
+                <input type="text" class="form-control" id="estimasi_harga" >
+            </div>
+        </div>
            
                 </form>
                 </div>
@@ -80,8 +88,9 @@
                 <h5>Data Customer</h5>
                 <hr>
             </center>
+            @foreach ($item as $invoice )
             <form method="POST" action="{{ URL('/workorder/store') }}" enctype="multipart/form-data">
-            @csrf           
+            @csrf {{ method_field('PATCH') }}           
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
@@ -150,6 +159,7 @@
             </div>
             <br>
             <button type="submit" class="btn btn-success">Submit</button>
+            @endforeach
         </div> 
         </form>
     </div>
@@ -165,14 +175,14 @@
             // console.log(data)
             $.ajax({
                 type: 'POST',
-                url: "{{ route('workorder.storeCart') }}",
+                url: "{{ route('invoice.storeCart') }}",
                 data: data,
                 success: function(data) {
                     $("#form-cart").get(0).reset();
                     $("#kode_barang").select2("");
                     tampil()
                     console.log(data)
-                    // .load("{{ url('workorder.table')}}");
+                    // .load("{{ url('invoice.table')}}");
                 }
             });
         });
@@ -180,7 +190,7 @@
         function tampil(){
             $.ajax({
                 type: 'GET',
-                url: "{{ route('workorder.viewCart') }}",
+                url: "{{ route('invoice.viewCart') }}",
                 success: function(data) {
                     console.log(data)
                     var table_value = "";

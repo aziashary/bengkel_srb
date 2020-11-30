@@ -20,7 +20,7 @@ class CreateStokKeluarTable extends Migration
             $table->integer('jumlah');
             $table->string('nama_user');
             $table->date('tanggal');
-            $table->string('no_invoice');
+            $table->string('no_invoice')->unique();
             $table->timestamps();
         });
     }

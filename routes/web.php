@@ -66,3 +66,13 @@ Route::group(['middleware' => 'isBarang'], function () {
         // Route::patch('/update/{id}', ['as' => 'jenis.update', 'uses' => 'JenisController@update']);
     });
 });
+
+Route::group(['prefix' => 'invoice'], function () {
+    Route::get('/', ['as' => 'invoice.index', 'uses' => 'InvoiceController@index']);
+//     Route::get('/create', ['as' => 'workorder.create', 'uses' => 'WorkOrderController@create']);
+//     Route::post('/storeCart', ['as' => 'workorder.storeCart', 'uses' => 'WorkOrderController@storeCart']);
+//     Route::get('/viewCart', ['as' => 'workorder.viewCart', 'uses' => 'WorkOrderController@viewCart']);
+//     Route::delete('/deleteCart/{id}', ['uses' => 'WorkOrderController@deleteCart']);
+//     Route::get('/diskon', ['uses' => 'WorkOrderController@diskon']);
+//     Route::post('/store', ['uses' => 'WorkOrderController@store']);
+});

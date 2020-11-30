@@ -15,7 +15,7 @@ class CreateInvoiceTable extends Migration
     {
         Schema::create('invoice', function (Blueprint $table) {
             $table->bigIncrements('id_invoice');
-            $table->string('no_invoice');
+            $table->string('no_invoice')->unique();
             $table->integer('id_workorder');
             $table->string('no_workorder');
             $table->integer('id_costumer');

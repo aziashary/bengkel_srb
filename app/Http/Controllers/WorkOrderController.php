@@ -87,7 +87,7 @@ class WorkOrderController extends Controller
     public function storeCart(Request $request){
         $harga = Barang::where('kode_barang', $request->kode_barang)->select('harga_jual')->value('harga_jual');
         $diskon = Barang::where('kode_barang', $request->kode_barang)->select('diskon')->value('diskon');
-        $total = $harga * $request->jumlah;
+        $total = $diskon !== 0 ? $harga * ($diskon/100) * $request->jumlah : $harga * $request->jumlah ;
 
         $store = Tempo::create([
             'kode_barang' => $request->kode_barang,

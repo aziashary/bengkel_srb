@@ -57,9 +57,10 @@
                             <th>No </th>
                             <th>Nama Barang</th>
                             <th>Jumlah</th>
+                            <th>Diskon</th>
                             <th>Total</th>
                             <th>Deskripsi</th>
-                            <th colspan="2">Action</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody id="data-cart"></tbody>
@@ -199,6 +200,7 @@
                             "<td>"+no+"</td>"+
                             "<td>"+value.barangs.nama_barang+"</td>"+
                             "<td>"+value.jumlah+"</td>"+
+                            "<td>"+value.diskon+"</td>"+
                             "<td>"+value.total_harga+"</td>"+
                             "<td>"+value.deskripsi+"</td>"+
                             "<td><a href='javascript:void(0)' onClick='hapus("+value.id_tempo+")'>Hapus</a></td>"+

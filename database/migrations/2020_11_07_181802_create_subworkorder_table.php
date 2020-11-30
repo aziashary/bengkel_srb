@@ -23,7 +23,7 @@ class CreateSubworkorderTable extends Migration
             $table->integer('total');
             $table->text('deskripsi')->nullable();
             $table->date('tanggal_transaksi');
-            $table->string('no_workorder');
+            $table->string('no_workorder')->unique();
             $table->timestamps();
         });
     }
