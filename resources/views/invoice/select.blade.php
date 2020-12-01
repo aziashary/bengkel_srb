@@ -29,7 +29,7 @@
                         $no = 1;
                         ?>
                     <tbody>
-                        @foreach($item as $workorder)
+                        @foreach($data as $workorder)
                             <tr>
                                 <td>{{ $no++ }}</td>
                                 <td>{{ $workorder->no_workorder }}</td>

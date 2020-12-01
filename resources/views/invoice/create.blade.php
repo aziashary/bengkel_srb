@@ -68,10 +68,11 @@
             </div>
         </div>
         </form>
-        <div class="row">
+        
         <form method="POST" action="{{ URL('/invoice/store') }}" enctype="multipart/form-data">
         @foreach ($item as $invoice )
         @csrf 
+        <div class="row">
             <div class="form-group col-md-6">
                 <label for="kilometerAwal">Total Transaksi</label>
                 <input type="text" class="form-control" id="total" name='total' >

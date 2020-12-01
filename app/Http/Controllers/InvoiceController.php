@@ -17,9 +17,9 @@ class InvoiceController extends Controller
     public function index()
     {
         $item = DB::table('invoice')
-        ->select('invoice.id_invoice', 'invoice.no_invoice', 'invoice.model', 'invoice.delivery_date', 'invoice.estimasi_selesai','customer.nama_customer')
+        ->select('invoice.id_invoice', 'invoice.no_invoice', 'invoice.model', 'invoice.delivery_date', 'invoice.estimasi_selesai', 'invoice.no_workorder', 'customer.nama_customer')
         ->join('customer', 'customer.no_invoice', '=', 'invoice.no_invoice')
-        ->groupBy('invoice.id_invoice', 'invoice.no_invoice', 'invoice.model', 'invoice.delivery_date', 'invoice.estimasi_selesai','customer.nama_customer')
+        ->groupBy('invoice.id_invoice', 'invoice.no_invoice', 'invoice.model', 'invoice.delivery_date', 'invoice.estimasi_selesai', 'invoice.no_workorder', 'customer.nama_customer')
         ->get();
 
         return view('invoice.index')->with('data', $item);
@@ -27,10 +27,14 @@ class InvoiceController extends Controller
 
     public function select()
     {
-        $data = WorkOrder::where('status', 0)->get();
-        return view('invoice.select',[
-            'item' => $data,
-        ]);
+        $item = DB::table('workorder')
+        ->select('workorder.id_workorder', 'workorder.no_workorder', 'workorder.model', 'workorder.delivery_date', 'workorder.estimasi_selesai','customer.nama_customer')
+        ->join('customer', 'customer.no_workorder', '=', 'workorder.no_workorder')
+        ->where('status', '=', 0)
+        ->groupBy('workorder.id_workorder', 'workorder.no_workorder', 'workorder.model', 'workorder.delivery_date', 'workorder.estimasi_selesai','customer.nama_customer')
+        ->get();
+
+        return view('invoice.select')->with('data', $item);
     }
 
     public function create($id_workorder)
@@ -105,6 +109,11 @@ class InvoiceController extends Controller
             'alamat' => $request->alamat,
             'npwp'=> $request->npwp,
         ]);
+        
+        $gantistatus = WorkOrder::where('id_workorder', $request->id_workorder)->update([
+            'status' => 1,
+        ]);
+
         $id_customer = Customer::where('no_workorder', $request->no_workorder)->select('id_customer')->value('id_customer');
         $invoice = Invoice::create([
             'no_workorder' => $request->no_workorder,
@@ -120,7 +129,7 @@ class InvoiceController extends Controller
             'total_transaksi' => $request->total,
             'id_user'=> $request->id_user,
             'sales' => $request->sales,
-            'status' => 0,
+            'status' => 1,
         ]);
         
         $item = Tempo::where('id_users', $request->id_user)->with('barangs')->get();
