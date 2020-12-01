@@ -51,11 +51,12 @@ Route::group(['middleware' => 'isBarang'], function () {
     });
 });
 
-Route::group(['middleware' => 'isBarang'], function () {
+Route::group(['middleware' => 'isTransaksi'], function () {
     Route::group(['prefix' => 'workorder'], function () {
         Route::get('/', ['as' => 'workorder.index', 'uses' => 'WorkOrderController@index']);
         Route::get('/create', ['as' => 'workorder.create', 'uses' => 'WorkOrderController@create']);
         Route::post('/storeCart', ['as' => 'workorder.storeCart', 'uses' => 'WorkOrderController@storeCart']);
+        Route::get('/viewBarang/{kode_barang}', ['as' => 'workorder.viewBarang', 'uses' => 'WorkOrderController@viewBarang']);
         Route::get('/viewCart', ['as' => 'workorder.viewCart', 'uses' => 'WorkOrderController@viewCart']);
         Route::delete('/deleteCart/{id}', ['uses' => 'WorkOrderController@deleteCart']);
         Route::get('/diskon', ['uses' => 'WorkOrderController@diskon']);
@@ -65,7 +66,6 @@ Route::group(['middleware' => 'isBarang'], function () {
         // Route::get('/edit/{id}', ['as' => 'jenis.edit', 'uses' => 'JenisController@edit']);
         // Route::patch('/update/{id}', ['as' => 'jenis.update', 'uses' => 'JenisController@update']);
     });
-});
 
 Route::group(['prefix' => 'invoice'], function () {
     Route::get('/', ['as' => 'invoice.index', 'uses' => 'InvoiceController@index']);
@@ -76,4 +76,5 @@ Route::group(['prefix' => 'invoice'], function () {
 //     Route::delete('/deleteCart/{id}', ['uses' => 'WorkOrderController@deleteCart']);
 //     Route::get('/diskon', ['uses' => 'WorkOrderController@diskon']);
 //     Route::post('/store', ['uses' => 'WorkOrderController@store']);
+    });
 });

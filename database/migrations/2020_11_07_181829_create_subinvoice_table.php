@@ -23,7 +23,7 @@ class CreateSubinvoiceTable extends Migration
             $table->integer('diskon');
             $table->integer('total');
             $table->date('tanggal_transaksi');
-            $table->string('no_invoice')->unique();
+            $table->string('no_invoice');
             $table->timestamps();
         });
     }

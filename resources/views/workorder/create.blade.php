@@ -24,16 +24,21 @@
                             @endforeach
                         </select>
                 </div>
-                <div class="form-group col-md-2">
+               
+                <div class="form-group col-md-4">
+                    <label for="kilometerAwal">Stok</label>
+                    <input type="text" class="form-control" id="stok" readonly>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="kilometerAwal">Diskon</label>
+                    <input type="text" class="form-control" id="diskon">
+                </div>
+
+                <div class="form-group col-md-12">
                     <label for="kilometerAwal">Jumlah</label>
                     <!-- <input type="hidden" name="user" id="user" value="{{ Auth::user()->id }}"> -->
                     <input type="text" class="form-control" id="jumlah" name="jumlah" Placeholder="Masukan jumlah barang">
-                </div>
-               
-                <div class="form-group col-md-2">
-                    <label for="kilometerAwal">Diskon</label>
-                    <input type="hidden" class="form-control" id="stok">
-                    <input type="text" class="form-control" id="diskon">
                 </div>
                
                 <div class="form-group col-md-12">
@@ -174,8 +179,16 @@
     <script>
         
         $('#kode_barang').change(function () {
-            var data = $(this).val();
-            console.log(data)
+            var kode_barang = $(this).val();
+            // console.log(data)
+            $.ajax({
+                type: 'GET',
+                url: 'viewBarang/'+kode_barang,
+                success: function(data) {
+                    $("#stok").val(data[0].stok);
+                    $("#diskon").val(data[0].diskon);
+                }
+            });
         })
         $("#button-cart").click(function(){
             var data = $("#form-cart").serialize();

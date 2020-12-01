@@ -25,7 +25,6 @@ class WorkOrderController extends Controller
 
     public function create()
     {
-        $trx = Auth::user()->id;
         $barang = Barang::all();
         $cart = Tempo::all();
         // $destroy = Tempo::where('id_users', $trx)->delete();
@@ -38,53 +37,58 @@ class WorkOrderController extends Controller
 
     public function store(Request $request)
     {
-        dd ($request);
-        // $trx = Auth::user()->id;
-        // $nama = Auth::user()->name;
-        // $costumer = Costumer::create([
-        //     'no_workorder' => $trx,
-        //     'nama_costumer' => $request->nama_customer,
-        //     'alamat' => $request->alamat,
-        //     'npwp'=> $request->npwp,
-        // ]);
-        // $id_customer = Costumer::where('no_workorder', $trx)->select('id_costumer')->value('id_costumer');
-        // $workorder = WorkOrder::create([
-        //     'no_workorder' => $trx,
-        //     'id_costumer' => $id_customer,
-        //     'no_flat' => $request->flat_no, 
-        //     'model' => $request->model, 
-        //     'kilometer_awal' => $request->kilometer_awal,
-        //     'delivery_date'  => $request->delivery_date,
-        //     'milleage' => $request->milleage,
-        //     'estimasi_selesai' => $request->estimasi_selesai, 
-        //     'total_transaksi' => $request->total,
-        //     'nama_user'=>  $nama,
-        //     'sales' => $request->sales,
-        //     'status' => 0,
-        // ]);
-        // $id_workorder = WorkOrder::where('no_workorder', $trx)->select('id_workorder')->value('id_workorder');
-        // $item = Tempo::where('id_users', $trx)->with('barangs')->get(); 
-		// foreach ($item as $barang) {
-        //     $store = SubWorkOrder::create([
-        //         'id_workorder' => $id_workorder,
-        //         'kode_barang' => $barang->kode_barang,
-        //         'jumlah' => $barang->jumlah,
-        //         'deskripsi' => $barang->deskripsi,
-        //         'harga' => $barang->harga,
-        //         'diskon' => $barang->diskon,
-        //         'total' => $request->total,
-        //         'tanggal_transaksi'=> $request->delivery_date, 
-        //         'no_workorder'=> $trx,
-        //     ]);
+        $id_user = Auth::user()->id;
+        $nama_user = Auth::user()->name;
+        $dateNow = date('d');
+        $yearNow = date('Y');
+        $id_workorder = WorkOrder::latest('id_workorder')->select('id_workorder')->value('id_workorder');
+        $no_workorder = $dateNow."/SRB/".$id_user."/".$yearNow."/".($id_workorder+1);
+        // dd($no_workorder);
+        $costumer = Costumer::create([
+            'no_workorder' => $no_workorder,
+            'nama_costumer' => $request->nama_customer,
+            'alamat' => $request->alamat,
+            'npwp'=> $request->npwp,
+        ]);
+        $id_customer = Costumer::where('no_workorder', $no_workorder)->select('id_costumer')->value('id_costumer');
+        $workorder = WorkOrder::create([
+            'no_workorder' => $no_workorder,
+            'id_costumer' => $id_customer,
+            'no_flat' => $request->flat_no, 
+            'model' => $request->model, 
+            'kilometer_awal' => $request->kilometer_awal,
+            'delivery_date'  => $request->delivery_date,
+            'milleage' => $request->milleage,
+            'estimasi_selesai' => $request->estimasi_selesai, 
+            'total_transaksi' => $request->total,
+            'nama_user'=>  $nama_user,
+            'sales' => $request->sales,
+            'status' => 0,
+        ]);
+
+        $item = Tempo::where('id_users', $id_user)->with('barangs')->get();
+        $id_wo = WorkOrder::where('no_workorder', $no_workorder)->select('id_workorder')->value('id_workorder');
+		foreach ($item as $barang) {
+            $store = SubWorkOrder::create([
+                'id_workorder' => $id_wo,
+                'kode_barang' => $barang->kode_barang,
+                'jumlah' => $barang->jumlah,
+                'deskripsi' => $barang->deskripsi,
+                'harga' => $barang->harga,
+                'diskon' => $barang->diskon,
+                'total' => $request->total,
+                'tanggal_transaksi'=> $request->delivery_date, 
+                'no_workorder'=> $no_workorder,
+            ]);
         
-           
-        // }
-        // $destroy = Tempo::where('id_users', $trx)->delete();
-        // if($store){
-        //     return redirect('/workorder')->with('success','Berhasil menambahkan work order');
-        // }else{
-        //     return back()->with('error','Gagal menambahkan work order');
-        // }
+            $destroy = Tempo::where('id_users', $id_user)->delete();
+        }
+
+        if($store){
+            return redirect('/workorder')->with('success','Berhasil menambahkan work order');
+        }else{
+            return back()->with('error','Gagal menambahkan work order');
+        }
     }
 
     public function storeCart(Request $request){
@@ -112,6 +116,13 @@ class WorkOrderController extends Controller
     {
         $id = Auth::id();
         $data = Tempo::where('id_users', $id)->with('barangs')->get();
+
+        return response()->json($data);
+    }
+
+    public function viewBarang($kode_barang)
+    {
+        $data = Barang::where('kode_barang', $kode_barang)->get();
 
         return response()->json($data);
     }
