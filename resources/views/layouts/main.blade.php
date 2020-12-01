@@ -159,8 +159,8 @@
           </a>
           <div id="collapseinvoice" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-              <a class="collapse-item" href="cards.html">Tambah Work Order</a>
-              <a class="collapse-item" href="{{ route('invoice.index')}}">Data Invoice</a>
+              <a class="collapse-item" href="cards.html">Tambah Invoice</a>
+              <a class="collapse-item" href="{{ route('invoice.index') }}">Data Invoice</a>
             </div>
           </div>
         </li>
@@ -328,8 +328,8 @@
             <a class="btn btn-primary" href="{{ route('logout') }}" onclick="event.preventDefault();
           document.getElementById('logout-form').submit();">Logout</a>
           <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                          @csrf
-                                          </form>
+          @csrf
+          </form>
           </div>
         </div>
       </div>
