@@ -2,17 +2,27 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Barang;
 use App\Tempo;
 use App\WorkOrder;
 use App\SubWorkOrder;
+use App\Customer;
+use App\Invoice;
+use App\SubInvoice;
 use DB;
 
 class InvoiceController extends Controller
 {
     public function index()
     {
-        return view('invoice.index');
+        $item = DB::table('invoice')
+        ->select('invoice.id_invoice', 'invoice.no_invoice', 'invoice.model', 'invoice.delivery_date', 'invoice.estimasi_selesai','customer.nama_customer')
+        ->join('customer', 'customer.no_invoice', '=', 'invoice.no_invoice')
+        ->groupBy('invoice.id_invoice', 'invoice.no_invoice', 'invoice.model', 'invoice.delivery_date', 'invoice.estimasi_selesai','customer.nama_customer')
+        ->get();
+
+        return view('invoice.index')->with('data', $item);
     }
 
     public function select()
@@ -23,25 +33,38 @@ class InvoiceController extends Controller
         ]);
     }
 
-    public function create($no_workorder)
+    public function create($id_workorder)
     {
-        $data = WorkOrder::where('workorder.no_workorder', $no_workorder)->get();
-        $barang = Barang::pluck('nama_barang','kode_barang')->toArray();
-        return view('workorder.create',[
-            'item' => $data,
-            'barang' => $barang,
-
-        ]);
-        $tempo = SubWorkOrder::where('subworkorder.no_workorder', $no_workorder)->get();
+        
+        $id_user = WorkOrder::where('id_workorder', $id_workorder)->select('id_user')->value('id_user');
+        $subwo = SubWorkOrder::where('subworkorder.id_workorder', $id_workorder)->get();
+        $destroy = Tempo::where('id_users', $id_user)->delete();
+        foreach ($subwo as $tempo) {
         $store = Tempo::create([
             'kode_barang' => $tempo->kode_barang,
             'jumlah' => $tempo->jumlah,
             'deskripsi' => $tempo->deskripsi,
-            'diskon' => $tempo->$diskon,
-            'harga' => $tempo->$harga,
-            'total_harga' => $tempo->$total,
-            'id_users' => $tempo->user,
+            'diskon' => $tempo->diskon,
+            'harga' => $tempo->harga,
+            'total_harga' => $tempo->total,
+            'id_users' => $id_user,
             ]);
+        }
+        
+        
+        $data = WorkOrder::where('workorder.id_workorder', $id_workorder)->get();
+        $wo = WorkOrder::where('workorder.id_workorder', $id_workorder)->select('no_workorder')->
+        value('no_workorder');
+        $work = Customer::where('customer.no_workorder', $wo)->get();
+        $barang = Barang::pluck('nama_barang','kode_barang')->toArray();
+        return view('invoice.create',[
+            'item' => $data,
+            'barang' => $barang,
+            'no_wo' => $work,
+
+        ]);
+      
+        
     }
 
     public function keranjang(Request $request)
@@ -66,47 +89,64 @@ class InvoiceController extends Controller
         }
     }
 
-    public function store(Request $request, $no_workorder)
+    public function store(Request $request)
     {
-        $trx= Auth::user()->id;
-        $nama= Auth::user()->name;
-       
-        $id_customer = Costumer::where('no_workorder', $trx)->select('id_costumer')->value('id_costumer');
-        $workorder = Invoice::create([
-            'no_workorder' => $trx,
-            'id_costumer' => $id_customer,
+        $id_user = Auth::user()->id;
+        $nama_user = Auth::user()->name;
+        $dateNow = date('d');
+        $yearNow = date('Y');
+        $id_invoice = Invoice::latest('id_invoice')->select('id_invoice')->value('id_invoice');
+        $no_invoice = "/INV/".$dateNow."/SRB/".$id_user."/".$yearNow."/".($id_invoice+1);
+        // dd($no_workorder);
+        
+        $customer = Customer::where('no_workorder', $request->no_workorder)->update([
+            'no_invoice' => $no_invoice,
+            'nama_customer' => $request->nama_customer,
+            'alamat' => $request->alamat,
+            'npwp'=> $request->npwp,
+        ]);
+        $id_customer = Customer::where('no_workorder', $request->no_workorder)->select('id_customer')->value('id_customer');
+        $invoice = Invoice::create([
+            'no_workorder' => $request->no_workorder,
+            'id_workorder' => $request->id_workorder,
+            'no_invoice' => $no_invoice,
+            'id_customer' => $request->id_customer,
             'no_flat' => $request->flat_no, 
             'model' => $request->model, 
             'kilometer_awal' => $request->kilometer_awal,
             'delivery_date'  => $request->delivery_date,
             'milleage' => $request->milleage,
             'estimasi_selesai' => $request->estimasi_selesai, 
-            'total_transaksi' => $trx,
-            'nama_user'=>  $nama,
+            'total_transaksi' => $request->total,
+            'id_user'=> $request->id_user,
             'sales' => $request->sales,
-            'status' => 1,
+            'status' => 0,
         ]);
-        $item = Tempo::where('id_users', $trx)->with('barangs')->get(); 
+        
+        $item = Tempo::where('id_users', $request->id_user)->with('barangs')->get();
+        $id_subwo = SubWorkOrder::where('no_workorder', $request->no_workorder)->select('id_subworkorder')->value('id_subworkorder');
 		foreach ($item as $barang) {
             $store = SubInvoice::create([
-                'id_workorder' => $barang->kode_barang,
+                'id_workorder' => $request->id_workorder,
+                'id_subworkorder' => $id_subwo,
+                'id_invoice' => $id_invoice,
                 'kode_barang' => $barang->kode_barang,
                 'jumlah' => $barang->jumlah,
                 'deskripsi' => $barang->deskripsi,
                 'harga' => $barang->harga,
                 'diskon' => $barang->diskon,
-                'total' => $barang->kode_barang,
+                'total' => $barang->total_harga,
                 'tanggal_transaksi'=> $request->delivery_date, 
-                'no_workorder'=> $trx,
+                'no_invoice'=> $no_invoice,
             ]);
         
-            $destroy = Tempo::where('id_users', $trx)->delete();
+            $destroy = Tempo::where('id_users', $request->id_user)->delete();
         }
 
         if($store){
-            return redirect('/workorder')->with('success','Berhasil menambahkan barang');
+            return redirect('/invoice')->with('success','Berhasil menambahkan work order');
         }else{
-            return back('/workorder')->with('error','Gagal menambahkan barang');
+            return back()->with('error','Gagal menambahkan work order');
         }
     }
 

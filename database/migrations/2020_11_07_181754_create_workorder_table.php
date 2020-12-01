@@ -16,7 +16,7 @@ class CreateWorkorderTable extends Migration
         Schema::create('workorder', function (Blueprint $table) {
             $table->bigIncrements('id_workorder');
             $table->string('no_workorder')->unique();
-            $table->integer('id_costumer');
+            $table->integer('id_customer');
             $table->string('no_flat');
             $table->string('model');
             $table->date('delivery_date');
@@ -24,7 +24,7 @@ class CreateWorkorderTable extends Migration
             $table->integer('kilometer_awal');
             $table->date('estimasi_selesai');
             $table->integer('total_transaksi');
-            $table->string('nama_user');
+            $table->integer('id_user');
             $table->string('sales')->nullable();
             $table->integer('status');
             $table->timestamps();

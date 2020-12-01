@@ -86,7 +86,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="namaCustomer">Nama Customer</label>
-                        <input type="text" class="form-control" value="{{ $invoice -> nama_costumer }}" id="namaCustomer" name="nama_customer" Placeholder="Isi nama..">
+                        <input type="text" class="form-control" value="{{ $invoice -> nama_customer }}" id="namaCustomer" name="nama_customer" Placeholder="Isi nama..">
                     </div>
                 </div>
                 

@@ -4,14 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Costumer extends Model
+class Customer extends Model
 {
-    protected $table = 'costumer';
+    protected $table = 'customer';
     
     protected $fillable = [
         'no_workorder',
         'no_invoice',
-        'nama_costumer',
+        'nama_customer',
         'alamat',
         'npwp'
     ];

@@ -20,7 +20,9 @@ class CreateSubinvoiceTable extends Migration
             $table->integer('id_workorder');
             $table->string('kode_barang');
             $table->integer('jumlah');
+            $table->integer('harga');
             $table->integer('diskon');
+            $table->text('deskripsi')->nullable();
             $table->integer('total');
             $table->date('tanggal_transaksi');
             $table->string('no_invoice');

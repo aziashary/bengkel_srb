@@ -70,11 +70,11 @@ Route::group(['middleware' => 'isTransaksi'], function () {
 Route::group(['prefix' => 'invoice'], function () {
     Route::get('/', ['as' => 'invoice.index', 'uses' => 'InvoiceController@index']);
     Route::get('/select', ['as' => 'invoice.select', 'uses' => 'InvoiceController@select']);
-    Route::get('/select/{no_workorder}', ['as' => 'invoice.create', 'uses' => 'InvoiceController@create']);
-//     Route::post('/storeCart', ['as' => 'workorder.storeCart', 'uses' => 'WorkOrderController@storeCart']);
-//     Route::get('/viewCart', ['as' => 'workorder.viewCart', 'uses' => 'WorkOrderController@viewCart']);
-//     Route::delete('/deleteCart/{id}', ['uses' => 'WorkOrderController@deleteCart']);
-//     Route::get('/diskon', ['uses' => 'WorkOrderController@diskon']);
-//     Route::post('/store', ['uses' => 'WorkOrderController@store']);
+    Route::get('/create/{id_workorder}', ['as' => 'invoice.create', 'uses' => 'InvoiceController@create']);
+    Route::post('/storeCart', ['as' => 'invoice.storeCart', 'uses' => 'InvoiceController@storeCart']);
+    Route::get('/viewCart', ['as' => 'invoice.viewCart', 'uses' => 'InvoiceController@viewCart']);
+    Route::delete('/deleteCart/{id}', ['uses' => 'InvoiceController@deleteCart']);
+    Route::get('/diskon', ['uses' => 'InvoiceController@diskon']);
+    Route::post('/store', ['uses' => 'InvoiceController@store']);
     });
 });

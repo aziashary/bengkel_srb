@@ -26,11 +26,27 @@
                         <th>Tanggal Masuk</th>
                         <th>Estimasi</th>
                         <th>Pemilik</th>
-                        <th>Aksi</th>
                         </tr>
                     </thead>
+                    <?php
+                        $no = 1;
+                        ?>
                     <tbody>
-                  
+                        @foreach($data as $invoice)
+                            <tr>
+                                <td>{{ $no++ }}</td>
+                                <td>{{ $invoice->no_invoice }}</td>
+                                <td>{{ $invoice->model }}</td>
+                                <td>{{ $invoice->delivery_date }}</td>
+                                <td>{{ $invoice->estimasi_selesai }}</td>
+                                <td>{{ $invoice->nama_customer }}</td>
+                                <td align="center" width="140">
+                                    <a href="{{ URL('invoice/edit/'. $invoice->id_invoice) }}" class="btn btn-warning">Edit</a>
+                                    <a href="{{ URL('invoice/delete/'. $invoice->id_invoice) }}" class="btn btn-danger">Hapus</a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
                 </table>
             </div>
         </div>

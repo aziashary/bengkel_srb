@@ -10,7 +10,7 @@ class WorkOrder extends Model
     
     protected $fillable = [
         'no_workorder',
-        'id_costumer',
+        'id_customer',
         'no_flat',
         'model',
         'delivery_date',
@@ -18,7 +18,7 @@ class WorkOrder extends Model
         'estimasi_selesai',
         'kilometer_awal',
         'total_transaksi',
-        'nama_user',
+        'id_user',
         'sales',
         'status'
 

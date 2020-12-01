@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container-fluid">
-	<title>Select WorkOrder</title>
+	<title>Select Work Order</title>
     <h3 class="mt-4">Table Select</h3>
     <div class="mb-4">
     </div>
@@ -36,9 +36,9 @@
                                 <td>{{ $workorder->model }}</td>
                                 <td>{{ $workorder->delivery_date }}</td>
                                 <td>{{ $workorder->estimasi_selesai }}</td>
-                                <td>{{ $workorder->nama_costumer }}</td>
+                                <td>{{ $workorder->nama_customer }}</td>
                                 <td align="center" width="140">
-                                    <a href="{{ URL('workorder/select/'. $workorder->no_workorder) }}" class="btn btn-primary">Tambah Invoice</a>
+                                    <a href="{{ URL('invoice/create/'. $workorder->id_workorder) }}" class="btn btn-primary">Tambah Invoice</a>
                                 </td>
                             </tr>
                         @endforeach

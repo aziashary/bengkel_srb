@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Barang;
 use App\Tempo;
-use App\Costumer;
+use App\Customer;
 use App\WorkOrder;
 use App\SubWorkOrder;
 use DB;
@@ -15,9 +15,9 @@ class WorkOrderController extends Controller
     public function index()
     {
         $item = DB::table('workorder')
-        ->select('workorder.id_workorder', 'workorder.no_workorder', 'workorder.model', 'workorder.delivery_date', 'workorder.estimasi_selesai','costumer.nama_costumer')
-        ->join('costumer', 'costumer.no_workorder', '=', 'workorder.no_workorder')
-        ->groupBy('workorder.id_workorder', 'workorder.no_workorder', 'workorder.model', 'workorder.delivery_date', 'workorder.estimasi_selesai','costumer.nama_costumer')
+        ->select('workorder.id_workorder', 'workorder.no_workorder', 'workorder.model', 'workorder.delivery_date', 'workorder.estimasi_selesai','customer.nama_customer')
+        ->join('customer', 'customer.no_workorder', '=', 'workorder.no_workorder')
+        ->groupBy('workorder.id_workorder', 'workorder.no_workorder', 'workorder.model', 'workorder.delivery_date', 'workorder.estimasi_selesai','customer.nama_customer')
         ->get();
 
         return view('workorder.index')->with('data', $item);
@@ -42,18 +42,18 @@ class WorkOrderController extends Controller
         $dateNow = date('d');
         $yearNow = date('Y');
         $id_workorder = WorkOrder::latest('id_workorder')->select('id_workorder')->value('id_workorder');
-        $no_workorder = $dateNow."/SRB/".$id_user."/".$yearNow."/".($id_workorder+1);
+        $no_workorder = "/WO/".$dateNow."/SRB/".$id_user."/".$yearNow."/".($id_workorder+1);
         // dd($no_workorder);
-        $costumer = Costumer::create([
+        $customer = Customer::create([
             'no_workorder' => $no_workorder,
-            'nama_costumer' => $request->nama_customer,
+            'nama_customer' => $request->nama_customer,
             'alamat' => $request->alamat,
             'npwp'=> $request->npwp,
         ]);
-        $id_customer = Costumer::where('no_workorder', $no_workorder)->select('id_costumer')->value('id_costumer');
+        $id_customer = Customer::where('no_workorder', $no_workorder)->select('id_customer')->value('id_customer');
         $workorder = WorkOrder::create([
             'no_workorder' => $no_workorder,
-            'id_costumer' => $id_customer,
+            'id_customer' => $id_customer,
             'no_flat' => $request->flat_no, 
             'model' => $request->model, 
             'kilometer_awal' => $request->kilometer_awal,
@@ -61,7 +61,7 @@ class WorkOrderController extends Controller
             'milleage' => $request->milleage,
             'estimasi_selesai' => $request->estimasi_selesai, 
             'total_transaksi' => $request->total,
-            'nama_user'=>  $nama_user,
+            'id_user'=> $id_user,
             'sales' => $request->sales,
             'status' => 0,
         ]);
@@ -76,7 +76,7 @@ class WorkOrderController extends Controller
                 'deskripsi' => $barang->deskripsi,
                 'harga' => $barang->harga,
                 'diskon' => $barang->diskon,
-                'total' => $request->total,
+                'total' => $barang->total_harga,
                 'tanggal_transaksi'=> $request->delivery_date, 
                 'no_workorder'=> $no_workorder,
             ]);
@@ -94,7 +94,7 @@ class WorkOrderController extends Controller
     public function storeCart(Request $request){
         $harga = Barang::where('kode_barang', $request->kode_barang)->select('harga_jual')->value('harga_jual');
         $diskon = Barang::where('kode_barang', $request->kode_barang)->select('diskon')->value('diskon');
-        $total = $diskon !== 0 ? $harga * ($diskon/100) * $request->jumlah : $harga * $request->jumlah ;
+        $total = $diskon !== 0 ? $harga - ($harga * ($diskon/100)) * $request->jumlah : $harga * $request->jumlah ;
 
         $store = Tempo::create([
             'kode_barang' => $request->kode_barang,

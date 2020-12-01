@@ -39,7 +39,7 @@
                                 <td>{{ $workorder->model }}</td>
                                 <td>{{ $workorder->delivery_date }}</td>
                                 <td>{{ $workorder->estimasi_selesai }}</td>
-                                <td>{{ $workorder->nama_costumer }}</td>
+                                <td>{{ $workorder->nama_customer }}</td>
                                 <td align="center" width="140">
                                     <a href="{{ URL('workorder/edit/'. $workorder->id_workorder) }}" class="btn btn-warning">Edit</a>
                                     <a href="{{ URL('workorder/delete/'. $workorder->id_workorder) }}" class="btn btn-danger">Hapus</a>

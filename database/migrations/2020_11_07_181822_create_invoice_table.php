@@ -18,17 +18,17 @@ class CreateInvoiceTable extends Migration
             $table->string('no_invoice')->unique();
             $table->integer('id_workorder');
             $table->string('no_workorder');
-            $table->integer('id_costumer');
+            $table->integer('id_customer');
             $table->string('no_flat');
             $table->string('model');
-            $table->string('delivery_date');
+            $table->date('delivery_date');
             $table->integer('milleage');
-            $table->text('deskripsi')->nullable();
-            $table->date('tanggal_transaksi');
+            $table->integer('kilometer_awal');
+            $table->date('estimasi_selesai');
             $table->integer('total_transaksi');
-            $table->string('nama_user');
+            $table->integer('id_user');
             $table->string('sales')->nullable();
-            $table->string('status')->nullable();
+            $table->integer('status')->nullable();
             $table->timestamps();
         });
     }
