@@ -28,6 +28,7 @@ class CreateInvoiceTable extends Migration
             $table->integer('total_transaksi');
             $table->string('nama_user');
             $table->string('sales')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

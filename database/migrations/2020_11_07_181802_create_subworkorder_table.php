@@ -16,7 +16,7 @@ class CreateSubworkorderTable extends Migration
         Schema::create('subworkorder', function (Blueprint $table) {
             $table->bigIncrements('id_subworkorder');
             $table->integer('id_workorder');
-            $table->integer('kode_barang');
+            $table->string('kode_barang');
             $table->integer('jumlah');
             $table->integer('harga');
             $table->integer('diskon');

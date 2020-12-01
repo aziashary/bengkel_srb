@@ -159,7 +159,7 @@
           </a>
           <div id="collapseinvoice" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-              <a class="collapse-item" href="cards.html">Tambah Work Order</a>
+              <a class="collapse-item" href="{{ route('invoice.select')}}">Tambah Work Order</a>
               <a class="collapse-item" href="{{ route('invoice.index')}}">Data Invoice</a>
             </div>
           </div>

@@ -11,6 +11,7 @@
                 <h5>Transaksi Work Order</h5>
                 <hr>
             </center>
+            
             <form id="form-cart">
             @csrf
             <div class="form-row">
@@ -68,18 +69,22 @@
                 </table>
             </div>
         </div>
+        
+        
+           
+        </form>
+        <form method="POST" action="{{ URL('/workorder/store') }}" enctype="multipart/form-data">
+            @csrf 
         <div class="row">
             <div class="form-group col-md-6">
-                <label for="kilometerAwal">Total Transaksi</label>
-                <input type="text" class="form-control" id="total" >
+                <label for="total">Total Transaksi</label>
+                <input type="text" class="form-control" id="total" name="total" >
             </div>
             <div class="form-group col-md-6">
                 <label for="kilometerAwal">Estimasi Harga</label>
                 <input type="text" class="form-control" id="estimasi_harga" >
             </div>
         </div>
-           
-        </form>
         </div>
     </div>
     <div class="card mb-4">
@@ -88,8 +93,7 @@
                 <h5>Data Customer</h5>
                 <hr>
             </center>
-            <form method="POST" action="{{ URL('/workorder/store') }}" enctype="multipart/form-data">
-            @csrf           
+                   
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">

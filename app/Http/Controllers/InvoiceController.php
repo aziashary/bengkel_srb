@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Barang;
 use App\Tempo;
 use App\WorkOrder;
+use App\SubWorkOrder;
 use DB;
 
 class InvoiceController extends Controller
@@ -17,7 +18,9 @@ class InvoiceController extends Controller
     public function select()
     {
         $data = WorkOrder::where('status', 0)->get();
-        return view('invoice.select');
+        return view('invoice.select',[
+            'item' => $data,
+        ]);
     }
 
     public function create($no_workorder)
@@ -29,7 +32,16 @@ class InvoiceController extends Controller
             'barang' => $barang,
 
         ]);
-        $tempo = detail_workorder::where('workorder.no_workorder', $no_workorder)->get();
+        $tempo = SubWorkOrder::where('subworkorder.no_workorder', $no_workorder)->get();
+        $store = Tempo::create([
+            'kode_barang' => $tempo->kode_barang,
+            'jumlah' => $tempo->jumlah,
+            'deskripsi' => $tempo->deskripsi,
+            'diskon' => $tempo->$diskon,
+            'harga' => $tempo->$harga,
+            'total_harga' => $tempo->$total,
+            'id_users' => $tempo->user,
+            ]);
     }
 
     public function keranjang(Request $request)
@@ -54,16 +66,11 @@ class InvoiceController extends Controller
         }
     }
 
-    public function store(Request $request)
+    public function store(Request $request, $no_workorder)
     {
         $trx= Auth::user()->id;
         $nama= Auth::user()->name;
-        $costumer = Costumer::create([
-            'no_workorder' => $trx,
-            'nama_costumer' => $request->nama_customer,
-            'alamat' => $request->alamat,
-            'npwp'=> $request->npwp,
-        ]);
+       
         $id_customer = Costumer::where('no_workorder', $trx)->select('id_costumer')->value('id_costumer');
         $workorder = Invoice::create([
             'no_workorder' => $trx,
@@ -81,7 +88,7 @@ class InvoiceController extends Controller
         ]);
         $item = Tempo::where('id_users', $trx)->with('barangs')->get(); 
 		foreach ($item as $barang) {
-            $store = SubWorkOrder::create([
+            $store = SubInvoice::create([
                 'id_workorder' => $barang->kode_barang,
                 'kode_barang' => $barang->kode_barang,
                 'jumlah' => $barang->jumlah,
@@ -97,9 +104,9 @@ class InvoiceController extends Controller
         }
 
         if($store){
-            return redirect('/workorder')->with('message_store','Berhasil menambahkan barang');
+            return redirect('/workorder')->with('success','Berhasil menambahkan barang');
         }else{
-            return back('/workorder')->with('message_store','Gagal menambahkan barang');
+            return back('/workorder')->with('error','Gagal menambahkan barang');
         }
     }
 

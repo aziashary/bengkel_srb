@@ -18,7 +18,7 @@ class CreateSubinvoiceTable extends Migration
             $table->integer('id_invoice');
             $table->integer('id_subworkorder');
             $table->integer('id_workorder');
-            $table->integer('kode_barang');
+            $table->string('kode_barang');
             $table->integer('jumlah');
             $table->integer('diskon');
             $table->integer('total');
