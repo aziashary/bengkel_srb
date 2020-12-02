@@ -2,13 +2,12 @@
 
 @section('content')
 <div class="container-fluid">
-    <h4>Tambah Work Order</h4>
-    <br>
-
+    <!-- <h4>Tambah Work Order</h4>
+    <br> -->
     <div class="card mb-4">
         <div class="card-body">       
             <center>
-                <h5>Transaksi Work Order</h5>
+                <h5>Tambah Work Order</h5>
                 <hr>
             </center>
             
@@ -81,14 +80,14 @@
         <form method="POST" action="{{ URL('/workorder/store') }}" enctype="multipart/form-data">
             @csrf 
         <div class="row">
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-12">
                 <label for="total">Total Transaksi</label>
-                <input type="text" class="form-control" id="total" name="total" >
+                <input type="text" class="form-control" id="total" name="total" readonly>
             </div>
-            <div class="form-group col-md-6">
+            <!-- <div class="form-group col-md-6">
                 <label for="kilometerAwal">Estimasi Harga</label>
-                <input type="text" class="form-control" id="estimasi_harga" >
-            </div>
+                <input type="text" class="form-control" id="estimasi_harga">
+            </div> -->
         </div>
         </div>
     </div>
