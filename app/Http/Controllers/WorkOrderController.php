@@ -93,21 +93,36 @@ class WorkOrderController extends Controller
 
     public function storeCart(Request $request){
         $harga = Barang::where('kode_barang', $request->kode_barang)->select('harga_jual')->value('harga_jual');
-        $diskon = Barang::where('kode_barang', $request->kode_barang)->select('diskon')->value('diskon');
-        $total = $diskon !== 0 ? $harga - ($harga * ($diskon/100)) * $request->jumlah : $harga * $request->jumlah ;
-
-        $store = Tempo::create([
-            'kode_barang' => $request->kode_barang,
-            'jumlah' => $request->jumlah,
-            'deskripsi' => $request->deskripsi,
-            'diskon' => $diskon,
-            'harga' => $harga,
-            'total_harga' => $total,
-            // 'id_users' => $request->user,
-            'id_users' => Auth::user()->id,
+        $stok = $request->stok;
+        $diskon = $request->diskon;
+        $jumlah = $request->jumlah;
+        $harga_diskon = $harga - ($diskon/100 * $harga);
+        $total = $diskon != 0 ? $harga_diskon * $jumlah : $harga * $jumlah ;
+        $find = Tempo::where('kode_barang', $request->kode_barang)->first();
+        if($find === null){
+            $store = Tempo::create([
+                'kode_barang' => $request->kode_barang,
+                'jumlah' => $jumlah,
+                'deskripsi' => $request->deskripsi,
+                'diskon' => $diskon,
+                'harga' => $harga,
+                'total_harga' => $total,
+                'id_users' => Auth::user()->id,
+            ]);
+        }else{
+            $store = Tempo::where('kode_barang', $request->kode_barang)->update([
+                'jumlah' => $find->jumlah + $jumlah,
+                'deskripsi' => $request->deskripsi,
+                'total_harga' => $find->total_harga + $total,
+            ]);
+        }
+        
+        $stok = $stok - $jumlah;
+        $updateStok = Barang::where('kode_barang', $request->kode_barang)->update([
+            'stok' => $stok
         ]);
 
-        if($store){
+        if($store && $updateStok){
             return response()->json(['success']);
         }
     }
@@ -129,6 +144,18 @@ class WorkOrderController extends Controller
 
     public function deleteCart($id)
     {
+        $findTempo = Tempo::where('id_tempo',$id)->first();
+        $kode_barang = $findTempo->kode_barang;
+        $jumlah = $findTempo->jumlah;
+
+        $findBarang = Barang::where('kode_barang',$kode_barang)->first();
+        $stokBarang = $findBarang->stok;
+
+        $stokBaru = $stokBarang + $jumlah;
+        $updateStok = Barang::where('kode_barang', $kode_barang)->update([
+            'stok' => $stokBaru
+        ]);
+
         $destroy = Tempo::where('id_tempo',$id)->delete();
 
         if($destroy){
