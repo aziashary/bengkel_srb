@@ -152,7 +152,6 @@ class InvoiceController extends Controller
         $invoice = Invoice::create([
             'no_workorder' => $request->no_workorder,
             'id_workorder' => $request->id_workorder,
-            'id_invoice' => $id_invoice,
             'no_invoice' => $no_invoice,
             'id_customer' => $request->id_customer,
             'no_flat' => $request->flat_no, 
