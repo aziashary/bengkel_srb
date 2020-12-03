@@ -11,8 +11,8 @@
     </div>
     <div class="card mb-4">
         <div class="card-header">
-            <i class="fas fa-table mr-1"></i>
-            Data Work Order
+        <h6 class="m-0 font-weight-bold text-primary">
+            Data Work Order </h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -41,8 +41,8 @@
                                 <td>{{ $workorder->estimasi_selesai }}</td>
                                 <td>{{ $workorder->nama_customer }}</td>
                                 <td align="center" width="140">
-                                    <a href="{{ URL('workorder/edit/'. $workorder->id_workorder) }}" class="btn btn-warning">Edit</a>
-                                    <a href="{{ URL('workorder/delete/'. $workorder->id_workorder) }}" class="btn btn-danger">Hapus</a>
+                                    <a href="{{ URL('workorder/detail/'. $workorder->id_workorder) }}" class="btn btn-primary">Detail</a>
+                                    <a href="{{ URL('workorder/print/'. $workorder->id_workorder) }}" class="btn btn-success">Print</a>
                                 </td>
                             </tr>
                         @endforeach

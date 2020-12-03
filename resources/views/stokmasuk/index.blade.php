@@ -10,8 +10,8 @@
     </div>
     <div class="card mb-4">
         <div class="card-header">
-            <i class="fas fa-table mr-1"></i>
-            Stok Masuk
+        <h6 class="m-0 font-weight-bold text-primary">
+            Stok Masuk</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -21,6 +21,7 @@
                         <th>No </th>
                         <th>Nama Barang</th>
                         <th>Tanggal Masuk Stok</th>
+                        <th>Update Tanggal Masuk Stok</th>
                         <th>Jumlah Masuk Stok</th>
                         <th>Nama</th>
                         <th>Action</th>
@@ -35,6 +36,7 @@
                             <td>{{ $no++ }}</td>
                             <th>{{ $stokmasuk->nama_barang }}</th>
                             <td>{{ $stokmasuk->created_at }}</td>
+                            <td>{{ $stokmasuk->updated_at }}</td>
                             <td>{{ $stokmasuk->jumlah}}</td>
                             <td>{{ $stokmasuk->nama_user }}</td>
                             <td>

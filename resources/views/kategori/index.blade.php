@@ -10,8 +10,8 @@
     </div>
     <div class="card mb-4">
         <div class="card-header">
-            <i class="fas fa-table mr-1"></i>
-            Data Kategori
+        <h6 class="m-0 font-weight-bold text-primary">
+            Data Kategori </h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">

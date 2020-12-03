@@ -25,6 +25,7 @@ class CreateInvoiceTable extends Migration
             $table->integer('milleage');
             $table->integer('kilometer_awal');
             $table->date('estimasi_selesai');
+            $table->date('finish_date');
             $table->integer('total_transaksi');
             $table->integer('id_user');
             $table->string('sales')->nullable();

@@ -61,6 +61,7 @@ Route::group(['middleware' => 'isTransaksi'], function () {
         Route::delete('/deleteCart/{id}', ['uses' => 'WorkOrderController@deleteCart']);
         Route::get('/diskon', ['uses' => 'WorkOrderController@diskon']);
         Route::post('/store', ['uses' => 'WorkOrderController@store']);
+        Route::get('/detail/{id_workorder}', ['as' => 'workorder.detail', 'uses' => 'WorkOrderController@detail']);
         // Route::post('/store', ['as' => 'jenis.store', 'uses' => 'JenisController@store']);
         // Route::get('/destroy/{id}', ['as' => 'jenis.destroy', 'uses' => 'JenisController@destroy']);
         // Route::get('/edit/{id}', ['as' => 'jenis.edit', 'uses' => 'JenisController@edit']);
@@ -76,5 +77,6 @@ Route::group(['prefix' => 'invoice'], function () {
     Route::delete('/deleteCart/{id}', ['uses' => 'InvoiceController@deleteCart']);
     Route::get('/diskon', ['uses' => 'InvoiceController@diskon']);
     Route::post('/store', ['uses' => 'InvoiceController@store']);
+    Route::get('/detail/{id_invoice}', ['as' => 'invoice.detail', 'uses' => 'InvoiceController@detail']);
     });
 });

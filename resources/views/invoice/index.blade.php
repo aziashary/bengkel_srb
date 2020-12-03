@@ -11,8 +11,8 @@
     </div>
     <div class="card mb-4">
         <div class="card-header">
-            <i class="fas fa-table mr-1"></i>
-            Table Invoice
+        <h6 class="m-0 font-weight-bold text-primary">
+            Table Invoice </h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -26,6 +26,7 @@
                         <th>Tanggal Masuk</th>
                         <th>Estimasi</th>
                         <th>Pemilik</th>
+                        <th>Action</th>
                         </tr>
                     </thead>
                     <?php
@@ -41,7 +42,9 @@
                                 <td>{{ $invoice->delivery_date }}</td>
                                 <td>{{ $invoice->estimasi_selesai }}</td>
                                 <td>{{ $invoice->nama_customer }}</td>
-                                
+                                <td align="center" width="140">
+                                    <a href="{{ URL('invoice/detail/'. $invoice->id_invoice) }}" class="btn btn-primary">Detail</a>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>

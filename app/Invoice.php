@@ -11,6 +11,7 @@ class Invoice extends Model
     protected $fillable = [
         'id_workorder',
         'no_workorder',
+        'id_invoice',
         'no_invoice',
         'id_customer',
         'no_flat',
@@ -18,6 +19,7 @@ class Invoice extends Model
         'delivery_date',
         'milleage',
         'estimasi_selesai',
+        'finish_date',
         'kilometer_awal',
         'total_transaksi',
         'id_user',

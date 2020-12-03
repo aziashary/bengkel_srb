@@ -35,6 +35,40 @@ class WorkOrderController extends Controller
         ]);
     }
 
+    public function detail($id_workorder)
+    {
+        
+        $id_user = WorkOrder::where('id_workorder', $id_workorder)->select('id_user')->value('id_user');
+        $subwo = SubWorkOrder::where('subworkorder.id_workorder', $id_workorder)->get();
+        $destroy = Tempo::where('id_users', $id_user)->delete();
+        foreach ($subwo as $tempo) {
+        $store = Tempo::create([
+            'kode_barang' => $tempo->kode_barang,
+            'jumlah' => $tempo->jumlah,
+            'deskripsi' => $tempo->deskripsi,
+            'diskon' => $tempo->diskon,
+            'harga' => $tempo->harga,
+            'total_harga' => $tempo->total,
+            'id_users' => $id_user,
+            ]);
+        }
+        
+        
+        $data = WorkOrder::where('workorder.id_workorder', $id_workorder)->get();
+        $wo = WorkOrder::where('workorder.id_workorder', $id_workorder)->select('no_workorder')->
+        value('no_workorder');
+        $work = Customer::where('customer.no_workorder', $wo)->get();
+        $barang = Barang::pluck('nama_barang','kode_barang')->toArray();
+        return view('workorder.detail',[
+            'item' => $data,
+            'barang' => $barang,
+            'no_wo' => $work,
+
+        ]);
+      
+        
+    }
+
     public function store(Request $request)
     {
         $id_user = Auth::user()->id;

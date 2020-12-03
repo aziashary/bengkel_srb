@@ -32,7 +32,7 @@
 
                 <div class="form-group col-md-4">
                     <label for="kilometerAwal">Diskon</label>
-                    <input type="text" class="form-control" id="diskon">
+                    <input type="text" class="form-control" id="diskon" readonly>
                 </div>
 
                 <div class="form-group col-md-12">
@@ -73,21 +73,14 @@
                     <tbody id="data-cart"></tbody>
                 </table>
             </div>
-        </div>
-        
-        
-           
+        </div>         
         </form>
         <form method="POST" action="{{ URL('/workorder/store') }}" enctype="multipart/form-data">
             @csrf 
         <div class="row">
-            <div class="form-group col-md-6">
-                <label for="total">Total Transaksi</label>
-                <input type="text" class="form-control" id="total" name="total" >
-            </div>
-            <div class="form-group col-md-6">
-                <label for="kilometerAwal">Estimasi Harga</label>
-                <input type="text" class="form-control" id="estimasi_harga" >
+            <div class="form-group col-md-12">
+                <label for="kilometerAwal"><h4>Total Transaksi</h4></label>
+                <input type="text" class="form-control" id="total" name='total' readonly>
             </div>
         </div>
         </div>
@@ -98,7 +91,6 @@
                 <h5>Data Customer</h5>
                 <hr>
             </center>
-                   
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
@@ -170,7 +162,7 @@
         </div> 
         </form>
     </div>
-        </div>
+</div>
 
     
 @endsection

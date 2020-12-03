@@ -9,14 +9,13 @@
             <a href="{{ route('barang.create') }}" class="center btn btn-gradient btn-primary" title="Tambah Data">Tambah Data</i></a>
         </div>
         <div class="btn-group">
-            <a href="#" class="center btn btn-gradient btn-success" title="Tambah Data">Tambah Stok Barang</i></a>
+            <a href="{{ route('stokmasuk.create') }}" class="center btn btn-gradient btn-success" title="Tambah Data">Tambah Stok Barang</i></a>
         </div>
     </div>
  
     <div class="card mb-4">
         <div class="card-header">
-            <i class="fas fa-table mr-1"></i>
-            Data Barang
+        <h6 class="m-0 font-weight-bold text-primary">Data Barang</h6> 
         </div>
         <div class="card-body">
             <div class="table-responsive">
