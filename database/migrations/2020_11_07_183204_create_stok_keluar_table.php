@@ -19,7 +19,8 @@ class CreateStokKeluarTable extends Migration
             $table->string('nama_barang');
             $table->integer('jumlah');
             $table->string('nama_user');
-            $table->string('no_invoice');
+            $table->string('no_workorder')->nullable();
+            $table->string('no_invoice')->nullable();
             $table->timestamps();
         });
     }

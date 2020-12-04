@@ -10,6 +10,7 @@ use App\SubWorkOrder;
 use App\Customer;
 use App\Invoice;
 use App\SubInvoice;
+use App\StokKeluar;
 use DB;
 
 class InvoiceController extends Controller
@@ -106,7 +107,7 @@ class InvoiceController extends Controller
             ]);
         }
         
-        $item = Invoice::where('invoice.id_invoice', $id_invoice)->get();
+        $item = Invoice::where('invoice.id_invoice', $id_invoice)->with('customers')->get();
         $barang = Barang::pluck('nama_barang','kode_barang')->toArray();
         return view('invoice.detail',[
             'item' => $item,
@@ -174,9 +175,17 @@ class InvoiceController extends Controller
                 'tanggal_transaksi'=> $request->delivery_date, 
                 'no_invoice'=> $no_invoice,
             ]);
-        
-            $destroy = Tempo::where('id_users', $request->id_user)->delete();
+            $nama_barang = Barang::where('kode_barang', $barang->kode_barang)->select('nama_barang')->value('nama_barang');
+            $stok_keluar = StokKeluar::create([
+                'kode_barang' => $barang->kode_barang,
+                'nama_barang' => $nama_barang,
+                'jumlah' => $barang->jumlah,
+                'nama_user' => $nama_user,
+                'no_invoice' => $no_invoice,
+            ]); 
+           
         }
+        $destroy = Tempo::where('id_users', $request->id_user)->delete(); 
 
         if($store){
             return redirect('/invoice')->with('success','Berhasil menambahkan Invoice');

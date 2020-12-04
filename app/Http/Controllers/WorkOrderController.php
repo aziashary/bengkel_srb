@@ -8,6 +8,7 @@ use App\Tempo;
 use App\Customer;
 use App\WorkOrder;
 use App\SubWorkOrder;
+use App\StokKeluar;
 use DB;
 
 class WorkOrderController extends Controller
@@ -111,15 +112,18 @@ class WorkOrderController extends Controller
                 'tanggal_transaksi'=> $request->delivery_date, 
                 'no_workorder'=> $no_workorder,
             ]);
-
+            
+            $nama_barang = Barang::where('kode_barang', $barang->kode_barang)->select('nama_barang')->value('nama_barang');
             $stok_keluar = StokKeluar::create([
-
-
-
+                'kode_barang' => $barang->kode_barang,
+                'nama_barang' => $nama_barang,
+                'jumlah' => $barang->jumlah,
+                'nama_user' => $nama_user,
+                'no_workorder' => $no_workorder,
             ]); 
-            $destroy = Tempo::where('id_users', $id_user)->delete();
         }
 
+        $destroy = Tempo::where('id_users', $id_user)->delete();
 
 
         if($store){

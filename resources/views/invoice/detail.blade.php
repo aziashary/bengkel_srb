@@ -63,12 +63,12 @@
                 <hr>
             </center>
             <div class="row">
-            @foreach ($no_wo as $workorder )
+            @foreach ($item as $invoice )
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="namaCustomer">Nama Customer</label>
           
-                        <input type="text" class="form-control" value="{{ $workorder -> nama_customer }}" id="namaCustomer" name="nama_customer" Placeholder="Isi nama.." readonly>
+                        <input type="text" class="form-control" value="{{ $invoice->customers->nama_customer }}" id="namaCustomer" name="nama_customer" Placeholder="Isi nama.." readonly>
                     </div>
                 </div>
                 
@@ -87,7 +87,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="namaCustomer">Alamat</label>
-                        <textarea class="form-control" id="alamat"  name="alamat" Placeholder="Alamat..." readonly>{{ $workorder-> alamat }}</textarea>
+                        <textarea class="form-control" id="alamat"  name="alamat" Placeholder="Alamat..." readonly>{{ $invoice->customers->alamat }}</textarea>
                     </div>
                 </div>
             </div>
@@ -96,7 +96,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="npwp">NPWP</label>
-                        <input type="text" class="form-control" value="{{ $workorder-> npwp }}" id="npwp" name="npwp" Placeholder="Isi NPWP.." readonly>
+                        <input type="text" class="form-control" value="{{ $invoice->customers->npwp }}" id="npwp" name="npwp" Placeholder="Isi NPWP.." readonly>
                     </div>
                 </div>
                 @endforeach

@@ -124,7 +124,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="npwp">Flat No</label>
-                        <input type="text" class="form-control" id="flat_no" value="{{ $invoice->customers->no_flat }}" name="flat_no">
+                        <input type="text" class="form-control" id="flat_no" value="{{ $invoice->no_flat }}" name="flat_no">
                     </div>
                 </div>
                 <div class="col-md-6">
