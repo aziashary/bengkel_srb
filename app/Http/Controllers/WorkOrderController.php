@@ -114,9 +114,16 @@ class WorkOrderController extends Controller
                 'tanggal_transaksi'=> $request->delivery_date, 
                 'no_workorder'=> $no_workorder,
             ]);
-        
+
+            $stok_keluar = StokKeluar::create([
+
+
+
+            ]); 
             $destroy = Tempo::where('id_users', $id_user)->delete();
         }
+
+
 
         if($store){
             return redirect('/workorder')->with('success','Berhasil menambahkan work order');

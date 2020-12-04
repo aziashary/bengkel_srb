@@ -122,7 +122,17 @@
                         <th>Stok</th>
                         </tr>
                     </thead>
+                    <?php
+                        $no = 1;
+                        ?>
                     <tbody>
+                        @foreach($stok_habis as $habis)
+                            <tr>
+                                <td>{{ $no++ }}</td>
+                                <td>{{ $habis->nama_barang }}</td>
+                                <td>{{ $habis->stok }}</td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -163,7 +173,18 @@
                         <th>Stok</th>
                         </tr>
                     </thead>
+                    <?php
+                        $no = 1;
+                        ?>
                     <tbody>
+                        @foreach($stok_masuk as $masuk)
+                            <tr>
+                                <td>{{ $no++ }}</td>
+                                <td>{{ $masuk->nama_barang }}</td>
+                                <td>{{ $masuk->created_at }}</td>
+                                <td>{{ $masuk->jumlah }}</td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -203,8 +224,6 @@
                         <th>Stok</th>
                         </tr>
                     </thead>
-                    <tbody>
-                    </tbody>
                 </table>
                    
                   </div>
@@ -233,13 +252,25 @@
                     <thead>
                         <tr>
                         <th>No </th>
-                        <th>Nama Costumer</th>
+                        <th>Nama Customer</th>
                         <th>Model</th>
                         <th>Estimasi Selesai</th>
                         <th>No Work Order</th>
                         </tr>
                     </thead>
+                    <?php
+                        $no = 1;
+                        ?>
                     <tbody>
+                        @foreach($workorder as $wo)
+                            <tr>
+                                <td>{{ $no++ }}</td>
+                                <td>{{ $wo->customers->nama_customer }}</td>
+                                <td>{{ $wo->model }}</td>
+                                <td>{{ $wo->estimasi_selesai }}</td>
+                                <td>{{ $wo->no_workorder }}</td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
                   </div>
@@ -259,13 +290,25 @@
                     <thead>
                         <tr>
                         <th>No </th>
-                        <th>Nama Costumer</th>
+                        <th>Nama Customer</th>
                         <th>Model</th>
-                        <th>Estimasi Selesai</th>
+                        <th>Selesai</th>
                         <th>No Work Order</th>
                         </tr>
                     </thead>
+                    <?php
+                        $no = 1;
+                        ?>
                     <tbody>
+                        @foreach($invoice as $inv)
+                            <tr>
+                                <td>{{ $no++ }}</td>
+                                <td>{{ $inv->customers->nama_customer }}</td>
+                                <td>{{ $inv->model }}</td>
+                                <td>{{ $inv->finish_date}}</td>
+                                <td>{{ $inv->no_invoice }}</td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
                   </div>

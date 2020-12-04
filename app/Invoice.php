@@ -27,6 +27,11 @@ class Invoice extends Model
         'status'
 
     ];
+
+    public function customers()
+    {
+        return $this->hasOne('App\Customer', 'no_workorder', 'no_workorder');
+    }
 }
 
 

@@ -46,7 +46,7 @@
         <div class="row">
             <div class="form-group col-md-12">
                 <label for="kilometerAwal"><h4>Total Transaksi</h4></label>
-                Rp.<input type="text" class="form-control" id="total" name='total' readonly>
+                <input type="text" class="form-control" id="total" name='total' readonly>
             </div>
         </div>
     </div>
