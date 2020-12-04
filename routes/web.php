@@ -68,15 +68,16 @@ Route::group(['middleware' => 'isTransaksi'], function () {
         // Route::patch('/update/{id}', ['as' => 'jenis.update', 'uses' => 'JenisController@update']);
     });
 
-Route::group(['prefix' => 'invoice'], function () {
-    Route::get('/', ['as' => 'invoice.index', 'uses' => 'InvoiceController@index']);
-    Route::get('/select', ['as' => 'invoice.select', 'uses' => 'InvoiceController@select']);
-    Route::get('/create/{id_workorder}', ['as' => 'invoice.create', 'uses' => 'InvoiceController@create']);
-    Route::post('/storeCart', ['as' => 'invoice.storeCart', 'uses' => 'InvoiceController@storeCart']);
-    Route::get('/viewCart', ['as' => 'invoice.viewCart', 'uses' => 'InvoiceController@viewCart']);
-    Route::delete('/deleteCart/{id}', ['uses' => 'InvoiceController@deleteCart']);
-    Route::get('/diskon', ['uses' => 'InvoiceController@diskon']);
-    Route::post('/store', ['uses' => 'InvoiceController@store']);
-    Route::get('/detail/{id_invoice}', ['as' => 'invoice.detail', 'uses' => 'InvoiceController@detail']);
+    Route::group(['prefix' => 'invoice'], function () {
+        Route::get('/', ['as' => 'invoice.index', 'uses' => 'InvoiceController@index']);
+        Route::get('/select', ['as' => 'invoice.select', 'uses' => 'InvoiceController@select']);
+        Route::get('/create/{id_workorder}', ['as' => 'invoice.create', 'uses' => 'InvoiceController@create']);
+        Route::post('/storeCart', ['as' => 'invoice.storeCart', 'uses' => 'InvoiceController@storeCart']);
+        Route::get('/viewBarang/{kode_barang}', ['as' => 'invoice.viewBarang', 'uses' => 'WorkOrderController@viewBarang']);
+        Route::get('/viewCart', ['as' => 'invoice.viewCart', 'uses' => 'InvoiceController@viewCart']);
+        Route::delete('/deleteCart/{id}', ['uses' => 'InvoiceController@deleteCart']);
+        Route::get('/diskon', ['uses' => 'InvoiceController@diskon']);
+        Route::post('/store', ['uses' => 'InvoiceController@store']);
+        Route::get('/detail/{id_invoice}', ['as' => 'invoice.detail', 'uses' => 'InvoiceController@detail']);
     });
 });

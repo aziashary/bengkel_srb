@@ -39,32 +39,28 @@ class InvoiceController extends Controller
 
     public function create($id_workorder)
     {
-        
         $id_user = WorkOrder::where('id_workorder', $id_workorder)->select('id_user')->value('id_user');
         $subwo = SubWorkOrder::where('subworkorder.id_workorder', $id_workorder)->get();
         $destroy = Tempo::where('id_users', $id_user)->delete();
         foreach ($subwo as $tempo) {
-        $store = Tempo::create([
-            'kode_barang' => $tempo->kode_barang,
-            'jumlah' => $tempo->jumlah,
-            'deskripsi' => $tempo->deskripsi,
-            'diskon' => $tempo->diskon,
-            'harga' => $tempo->harga,
-            'total_harga' => $tempo->total,
-            'id_users' => $id_user,
-            ]);
+            $store = Tempo::create([
+                'kode_barang' => $tempo->kode_barang,
+                'jumlah' => $tempo->jumlah,
+                'deskripsi' => $tempo->deskripsi,
+                'diskon' => $tempo->diskon,
+                'harga' => $tempo->harga,
+                'total_harga' => $tempo->total,
+                'id_users' => $id_user,
+                ]);
         }
         
-        
-        $data = WorkOrder::where('workorder.id_workorder', $id_workorder)->get();
-        $wo = WorkOrder::where('workorder.id_workorder', $id_workorder)->select('no_workorder')->
-        value('no_workorder');
+        $data = WorkOrder::where('workorder.id_workorder', $id_workorder)->with('customers')->get();
+        $wo = WorkOrder::where('workorder.id_workorder', $id_workorder)->select('no_workorder')->value('no_workorder');
         $work = Customer::where('customer.no_workorder', $wo)->get();
-        $barang = Barang::pluck('nama_barang','kode_barang')->toArray();
+        $barang = Barang::all();
         return view('invoice.create',[
             'item' => $data,
             'barang' => $barang,
-            'no_wo' => $work,
 
         ]);
       
@@ -95,32 +91,26 @@ class InvoiceController extends Controller
 
     public function detail($id_invoice)
     {
-        
         $id_user = Invoice::where('id_invoice', $id_invoice)->select('id_user')->value('id_user');
         $subwo = SubInvoice::where('subinvoice.id_invoice', $id_invoice)->get();
         $destroy = Tempo::where('id_users', $id_user)->delete();
         foreach ($subwo as $tempo) {
-        $store = Tempo::create([
-            'kode_barang' => $tempo->kode_barang,
-            'jumlah' => $tempo->jumlah,
-            'deskripsi' => $tempo->deskripsi,
-            'diskon' => $tempo->diskon,
-            'harga' => $tempo->harga,
-            'total_harga' => $tempo->total,
-            'id_users' => $id_user,
+            $store = Tempo::create([
+                'kode_barang' => $tempo->kode_barang,
+                'jumlah' => $tempo->jumlah,
+                'deskripsi' => $tempo->deskripsi,
+                'diskon' => $tempo->diskon,
+                'harga' => $tempo->harga,
+                'total_harga' => $tempo->total,
+                'id_users' => $id_user,
             ]);
         }
         
-        
-        $data = Invoice::where('invoice.id_invoice', $id_invoice)->get();
-        $wo = Invoice::where('invoice.id_invoice', $id_invoice)->select('no_invoice')->
-        value('no_invoice');
-        $work = Customer::where('customer.no_invoice', $wo)->get();
+        $item = Invoice::where('invoice.id_invoice', $id_invoice)->get();
         $barang = Barang::pluck('nama_barang','kode_barang')->toArray();
         return view('invoice.detail',[
-            'item' => $data,
+            'item' => $item,
             'barang' => $barang,
-            'no_wo' => $work,
 
         ]);
       
@@ -197,21 +187,36 @@ class InvoiceController extends Controller
 
     public function storeCart(Request $request){
         $harga = Barang::where('kode_barang', $request->kode_barang)->select('harga_jual')->value('harga_jual');
-        $diskon = Barang::where('kode_barang', $request->kode_barang)->select('diskon')->value('diskon');
-        $total = $harga * $request->jumlah;
-
-        $store = Tempo::create([
-            'kode_barang' => $request->kode_barang,
-            'jumlah' => $request->jumlah,
-            'deskripsi' => $request->deskripsi,
-            'diskon' => $diskon,
-            'harga' => $harga,
-            'total_harga' => $total,
-            // 'id_users' => $request->user,
-            'id_users' => Auth::user()->id,
+        $stok = $request->stok;
+        $diskon = $request->diskon;
+        $jumlah = $request->jumlah;
+        $harga_diskon = $harga - ($diskon/100 * $harga);
+        $total = $diskon != 0 ? $harga_diskon * $jumlah : $harga * $jumlah ;
+        $find = Tempo::where('kode_barang', $request->kode_barang)->first();
+        if($find === null){
+            $store = Tempo::create([
+                'kode_barang' => $request->kode_barang,
+                'jumlah' => $jumlah,
+                'deskripsi' => $request->deskripsi,
+                'diskon' => $diskon,
+                'harga' => $harga,
+                'total_harga' => $total,
+                'id_users' => Auth::user()->id,
+            ]);
+        }else{
+            $store = Tempo::where('kode_barang', $request->kode_barang)->update([
+                'jumlah' => $find->jumlah + $jumlah,
+                'deskripsi' => $request->deskripsi,
+                'total_harga' => $find->total_harga + $total,
+            ]);
+        }
+        
+        $stok = $stok - $jumlah;
+        $updateStok = Barang::where('kode_barang', $request->kode_barang)->update([
+            'stok' => $stok
         ]);
 
-        if($store){
+        if($store && $updateStok){
             return response()->json(['success']);
         }
     }
@@ -224,8 +229,27 @@ class InvoiceController extends Controller
         return response()->json($data);
     }
 
+    public function viewBarang($kode_barang)
+    {
+        $data = Barang::where('kode_barang', $kode_barang)->get();
+
+        return response()->json($data);
+    }
+
     public function deleteCart($id)
     {
+        $findTempo = Tempo::where('id_tempo',$id)->first();
+        $kode_barang = $findTempo->kode_barang;
+        $jumlah = $findTempo->jumlah;
+
+        $findBarang = Barang::where('kode_barang',$kode_barang)->first();
+        $stokBarang = $findBarang->stok;
+
+        $stokBaru = $stokBarang + $jumlah;
+        $updateStok = Barang::where('kode_barang', $kode_barang)->update([
+            'stok' => $stokBaru
+        ]);
+
         $destroy = Tempo::where('id_tempo',$id)->delete();
 
         if($destroy){

@@ -23,6 +23,11 @@ class WorkOrder extends Model
         'status'
 
     ];
+
+    public function customers()
+    {
+        return $this->hasOne('App\Customer', 'id_customer', 'id_customer');
+    }
 }
 
 
