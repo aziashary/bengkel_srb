@@ -26,7 +26,7 @@ class WorkOrder extends Model
 
     public function customers()
     {
-        return $this->hasOne('App\Customer', 'no_workorder', 'no_workorder');
+        return $this->hasOne('App\Customer', 'id_customer', 'id_customer');
     }
 }
 

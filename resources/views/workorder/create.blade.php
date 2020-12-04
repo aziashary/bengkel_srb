@@ -171,17 +171,17 @@
         
         $('#kode_barang').change(function () {
             var kode_barang = $(this).val();
-            // console.log(data)
+            
             $.ajax({
                 type: 'GET',
                 url: 'viewBarang/'+kode_barang,
                 success: function(data) {
-                    // console.log(data)
                     $("#stok").val(data[0].stok);
                     $("#diskon").val(data[0].diskon);
                 }
             });
-        })
+        });
+
         $("#button-cart").click(function(){
             var data = $("#form-cart").serialize();
             var stok = $("#stok").val();
@@ -202,10 +202,7 @@
                         // console.log(123, data)
                         $("#form-cart").get(0).reset();
                         $("#kode_barang").select2("");
-                        tampil()
-                        
-                        // console.log(2, data)
-                        // .load("{{ url('workorder.table')}}");
+                        tampil();
                     }
                 });
             }
@@ -237,7 +234,7 @@
                     $("#data-cart").html(table_value)
                     var arrayTotal = data.map(item => item.total_harga)
                     var total = arrayTotal.reduce((a, b) => a + b, 0)
-                    // console.log(66, total)
+                    
                     $("#total").val(total);
                 }
             });

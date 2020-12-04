@@ -37,7 +37,6 @@ class WorkOrderController extends Controller
 
     public function detail($id_workorder)
     {
-        
         $id_user = WorkOrder::where('id_workorder', $id_workorder)->select('id_user')->value('id_user');
         $subwo = SubWorkOrder::where('subworkorder.id_workorder', $id_workorder)->get();
         $destroy = Tempo::where('id_users', $id_user)->delete();
@@ -65,8 +64,6 @@ class WorkOrderController extends Controller
             'no_wo' => $work,
 
         ]);
-      
-        
     }
 
     public function store(Request $request)
