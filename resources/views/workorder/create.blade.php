@@ -77,9 +77,10 @@
         <form method="POST" action="{{ URL('/workorder/store') }}" enctype="multipart/form-data">
             @csrf 
         <div class="row">
-            <div class="form-group col-md-12">
-                <label for="kilometerAwal"><h4>Total Transaksi</h4></label>
-                <input type="text" class="form-control" id="total" name='total' readonly>
+            <div class="form-group col-md-12" align="center">
+                <label for="total"><h4>Total Transaksi</h4></label>
+                <h4 id="showTotal"></h4>
+                <input type="hidden" class="form-control" id="total" name='total' readonly>
             </div>
         </div>
         </div>
@@ -234,8 +235,10 @@
                     $("#data-cart").html(table_value)
                     var arrayTotal = data.map(item => item.total_harga)
                     var total = arrayTotal.reduce((a, b) => a + b, 0)
-                    
+                    var valTotal = total.toLocaleString();
+
                     $("#total").val(total);
+                    $("#showTotal").text(`Rp. ${valTotal}`);
                 }
             });
         }
