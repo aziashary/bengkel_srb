@@ -49,6 +49,10 @@ Route::group(['middleware' => 'isBarang'], function () {
         Route::post('/store', ['uses' => 'StokMasukController@store']);
         Route::get('/delete/{id_stokmasuk}', ['uses' => 'StokMasukController@delete']);
     });
+
+    Route::group(['prefix' => 'stokkeluar'], function () {
+        Route::get('/', ['as' => 'stokkeluar.index', 'uses' => 'StokKeluarController@index']);
+    });
 });
 
 Route::group(['middleware' => 'isTransaksi'], function () {
@@ -73,7 +77,7 @@ Route::group(['middleware' => 'isTransaksi'], function () {
         Route::get('/select', ['as' => 'invoice.select', 'uses' => 'InvoiceController@select']);
         Route::get('/create/{id_workorder}', ['as' => 'invoice.create', 'uses' => 'InvoiceController@create']);
         Route::post('/storeCart', ['as' => 'invoice.storeCart', 'uses' => 'InvoiceController@storeCart']);
-        Route::get('/viewBarang/{kode_barang}', ['as' => 'invoice.viewBarang', 'uses' => 'WorkOrderController@viewBarang']);
+        Route::get('/viewBarang/{kode_barang}', ['as' => 'invoice.viewBarang', 'uses' => 'InvoiceController@viewBarang']);
         Route::get('/viewCart', ['as' => 'invoice.viewCart', 'uses' => 'InvoiceController@viewCart']);
         Route::delete('/deleteCart/{id}', ['uses' => 'InvoiceController@deleteCart']);
         Route::get('/diskon', ['uses' => 'InvoiceController@diskon']);

@@ -32,7 +32,6 @@
                             <th>Diskon</th>
                             <th>Total</th>
                             <th>Deskripsi</th>
-                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody id="data-cart"></tbody>
@@ -201,7 +200,6 @@
                             "<td>"+value.diskon+"</td>"+
                             "<td>"+value.total_harga+"</td>"+
                             "<td>"+value.deskripsi+"</td>"+
-                            "<td><a href='javascript:void(0)' onClick='hapus("+value.id_tempo+")'>Hapus</a></td>"+
                         "</tr>"
                         no++
                     });

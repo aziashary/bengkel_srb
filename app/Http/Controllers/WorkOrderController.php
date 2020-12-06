@@ -54,7 +54,7 @@ class WorkOrderController extends Controller
         }
         
         
-        $data = WorkOrder::where('workorder.id_workorder', $id_workorder)->get();
+        $data = WorkOrder::where('workorder.id_workorder', $id_workorder)->with('customers')->get();
         $wo = WorkOrder::where('workorder.id_workorder', $id_workorder)->select('no_workorder')->
         value('no_workorder');
         $work = Customer::where('customer.no_workorder', $wo)->get();

@@ -195,8 +195,8 @@
           </a>
           <div id="collapselapstok" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-              <a class="collapse-item" href="cards.html">Laporan Stok Masuk</a>
-              <a class="collapse-item" href="buttons.html">Laporan Stok Keluar</a>
+              <a class="collapse-item" href="{{ route('stokmasuk.index') }}">Laporan Stok Masuk</a>
+              <a class="collapse-item" href="{{ route('stokkeluar.index') }}">Laporan Stok Keluar</a>
             </div>
           </div>
         </li>

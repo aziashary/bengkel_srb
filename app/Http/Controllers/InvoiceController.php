@@ -17,11 +17,7 @@ class InvoiceController extends Controller
 {
     public function index()
     {
-        $item = DB::table('invoice')
-        ->select('invoice.id_invoice', 'invoice.no_invoice', 'invoice.model', 'invoice.delivery_date', 'invoice.estimasi_selesai', 'invoice.no_workorder', 'customer.nama_customer')
-        ->join('customer', 'customer.no_invoice', '=', 'invoice.no_invoice')
-        ->groupBy('invoice.id_invoice', 'invoice.no_invoice', 'invoice.model', 'invoice.delivery_date', 'invoice.estimasi_selesai', 'invoice.no_workorder', 'customer.nama_customer')
-        ->get();
+        $item = Invoice::orderBy('created_at', 'desc')->with('customers')->get();
 
         return view('invoice.index')->with('data', $item);
     }

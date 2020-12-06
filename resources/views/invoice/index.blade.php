@@ -24,7 +24,7 @@
                         <th>No Work Order</th>
                         <th>Model</th>
                         <th>Tanggal Masuk</th>
-                        <th>Estimasi</th>
+                        <th>Tanggal Selesai</th>
                         <th>Pemilik</th>
                         <th>Action</th>
                         </tr>
@@ -40,8 +40,8 @@
                                 <td>{{ $invoice->no_workorder }}</td>
                                 <td>{{ $invoice->model }}</td>
                                 <td>{{ $invoice->delivery_date }}</td>
-                                <td>{{ $invoice->estimasi_selesai }}</td>
-                                <td>{{ $invoice->nama_customer }}</td>
+                                <td>{{ $invoice->finish_date }}</td>
+                                <td>{{ $invoice->customers->nama_customer }}</td>
                                 <td align="center" width="140">
                                     <a href="{{ URL('invoice/detail/'. $invoice->id_invoice) }}" class="btn btn-primary">Detail</a>
                                 </td>

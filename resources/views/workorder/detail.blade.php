@@ -31,7 +31,7 @@
                             <th>Diskon</th>
                             <th>Total</th>
                             <th>Deskripsi</th>
-                            <th>Action</th>
+                         
                         </tr>
                     </thead>
                     <tbody id="data-cart"></tbody>
@@ -58,12 +58,12 @@
                 <hr>
             </center>
             <div class="row">
-            @foreach ($no_wo as $workorder )
+            @foreach ($item as $workorder )
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="namaCustomer">Nama Customer</label>
           
-                        <input type="text" class="form-control" value="{{ $workorder -> nama_customer }}" id="namaCustomer" name="nama_customer" Placeholder="Isi nama.." readonly>
+                        <input type="text" class="form-control" value="{{ $workorder -> customers -> nama_customer }}" id="namaCustomer" name="nama_customer" Placeholder="Isi nama.." readonly>
                     </div>
                 </div>
                 
@@ -76,7 +76,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="namaCustomer">Alamat</label>
-                        <textarea class="form-control" id="alamat"  name="alamat" Placeholder="Alamat..." readonly>{{ $workorder-> alamat }}</textarea>
+                        <textarea class="form-control" id="alamat"  name="alamat" Placeholder="Alamat..." readonly>{{ $workorder-> customers -> alamat }}</textarea>
                     </div>
                 </div>
             </div>
@@ -85,7 +85,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="npwp">NPWP</label>
-                        <input type="text" class="form-control" value="{{ $workorder-> npwp }}" id="npwp" name="npwp" Placeholder="Isi NPWP.." readonly>
+                        <input type="text" class="form-control" value="{{ $workorder-> customers -> npwp }}" id="npwp" name="npwp" Placeholder="Isi NPWP.." readonly>
                     </div>
                 </div>
                 @endforeach
@@ -189,7 +189,7 @@
                             "<td>"+value.diskon+"</td>"+
                             "<td>"+value.total_harga+"</td>"+
                             "<td>"+value.deskripsi+"</td>"+
-                            "<td><a href='javascript:void(0)' onClick='hapus("+value.id_tempo+")'>Hapus</a></td>"+
+                            
                         "</tr>"
                         no++
                     });
